@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>ORGANISATION</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>ORGANISATION</h1>
+            
+        
+            <form action="#"th:action="@{/insertOrganisation}"th:object="${org}"method="post"class="form">
+            
+            <div class="form-group">
+                
+                <div class="form-group">
+                    <label for="orgncode">ORGANSATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="SHORT NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lname">LONG NAME</label>
+                    <input class="form-control"type="text"th:field="*{lname}"id="lname"placeholder="LONG NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('lname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="SHORT NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="countryid">LONG NAME</label>
+                    <input class="form-control"type="text"th:field="*{countryid}"id="countryid"placeholder="COUNTRY ID"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('countryid')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address1">Address 1</label>
+                    <input class="form-control"type="text"th:field="*{address1}"id="address1"placeholder="ADDRESS 1"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address1')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">Address 2</label>
+                    <input class="form-control"type="text"th:field="*{city}"id="city"placeholder="ADDRESS 2"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('city')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">CITY</label>
+                    <input class="form-control"type="text"th:field="*{city}"id="city"placeholder="CITY"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('city')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">STATE</label>
+                    <input class="form-control" type="text" th:field="*{state}" id="state" placeholder="STATE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">PINCODE</label>
+                    <input class="form-control"type="number"th:field="*{pincode}"id="pincode"placeholder="PINCODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('pincode')}"th:errors="*{number}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="fydcode">FYDCODE</label>
+                    <input class="form-control" type="text" th:field="*{fydcode}" id="fydcode" placeholder="FYDCODE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('fydcode')}" th:errors="*{fullName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="fydtyp">fydtyp</label>
+                    <input class="form-control" type="text" th:field="*{fydtyp}" id="fydtyp" placeholder="FYDTYPE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('fydtyp')}" th:errors="*{fydtyp}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="govrn1">GOVT 1</label>
+                    <input class="form-control" type="text" th:field="*{govrn1}" id="govrn1" placeholder="GOVT 1" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('govrn1')}" th:errors="*{govrn1}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="govrn2">GOVT 2</label>
+                    <input class="form-control" type="text" th:field="*{govrn2}" id="govrn2" placeholder="GOVT 2" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('govrn2')}" th:errors="*{govrn2}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="govrn3">GOVT 3</label>
+                    <input class="form-control" type="text" th:field="*{govrn3}" id="govrn3" placeholder="GOVT 3" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('govrn3')}" th:errors="*{govrn3}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="curro">ORGANISATION CURRENCY</label>
+                    <input class="form-control" type="text" th:field="*{curro}" id="curro" placeholder="ORGANISATION CURRENCY" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('curro')}" th:errors="*{curro}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="curra1">ORGANISATION ALTERNATE CURRENCY1</label>
+                    <input class="form-control" type="text" th:field="*{curra1}" id="curra1" placeholder="ORGANISATION ALTERNATE CURRENCY1" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('curra1')}" th:errors="*{curra1}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="curra2">ORGANISATION ALTERNATE CURRENCY2</label>
+                    <input class="form-control" type="text" th:field="*{curra2}" id="curra2" placeholder="ORGANISATION ALTERNATE CURRENCY2" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('curra2')}" th:errors="*{curra2}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="datetyp">DATE FORMAT</label><br>
+                    <input  type="radio"th:field="*{datetyp}"id="datetyp"name="datetyp1"value="DD/MM/YYYY">
+					<label for="datetyp1">DD/MM/YYYY</label>
+					<input type="radio"th:field="*{datetyp}"id="datetyp"name="datetyp2"value="MM/DD/YYYY">
+					<label for="datetyp2">MM/DD/YYYY</label>
+					<input type="radio"th:field="*{datetyp}"id="datetyp"name="datetyp3"value="YYYY/MM/DD">
+					<label for="datetyp3">YYYY/MM/DD</label>
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('datetyp')}" th:errors="*{text}"></div>
+                </div>
+                 <div class="form-group">
+                    <label for="ostat">ORGANISATION STATUS</label><br>
+                    <input  type="radio"th:field="*{ostat}"id="ostat"name="ostat1"value="TRIVIAL">
+					<label for="ostat1">TRIVIAL</label>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat2"value="ACTIVE">
+					<label for="ostat2">ACTIVE</label>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat3"value="DORMANT">
+					<label for="ostat3">DORMANT</label>
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('ostat')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

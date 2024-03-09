@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>CAVAL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>CAVAL</h1>
+            
+        
+            <form action="#"th:action="@{/insertCaval}"th:object="${caval}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+                <div class="form-group">
+                    <label for="costacc">COST ACCOUNT</label>
+                    <input class="form-control"type="number"th:field="*{costacc}"id="costacc"placeholder="COST ACCOUNT"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('costacc')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgncode">ORGANISATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valgrp">VAL GROUP</label>
+                    <input class="form-control"type="number"th:field="*{valgrp}"id="valgrp"placeholder="VAL GROUP"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valgrp')}"th:errors="*{valgrp}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vevent">EVENT</label><br>
+                    <input  type="radio"th:field="*{vevent}"id="vevent"name="vevent1"value="GIS">
+					<label for="vevent1">GIS</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent2"value="GI">
+					<label for="vevent2">GI</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent3"value="SR">
+					<label for="vevent3">SR</label>
+					<input  type="radio"th:field="*{vevent}"id="vevent"name="vevent1"value="GDS">
+					<label for="vevent4">GDS</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent2"value="SD">
+					<label for="vevent5">SD</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent3"value="INV">
+					<label for="vevent6">INV</label>
+					<input  type="radio"th:field="*{vevent}"id="vevent"name="vevent1"value="GR/IR">
+					<label for="vevent7">GR/IR</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent2"value="PC">
+					<label for="vevent8">PC</label>
+					<input type="radio"th:field="*{vevent}"id="vevent"name="vevent3"value="GR">
+					<label for="vevent9">GR</label>
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('vevent')}" th:errors="*{integer}"></div>
+                </div>
+                
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

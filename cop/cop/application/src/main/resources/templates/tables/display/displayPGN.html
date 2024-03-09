@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLANT GOVERNMENT NUMBER</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchPGN}" method="get">
+<button  style="float: left;"><a th:href="@{/insertPgn}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by plant" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findPGN}">
+			<h1>PLANT GOVERNMENT NUMBER</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">pgn_pk</th>
+						<th scope="col">plant</th>
+						<th scope="col">seton</th>
+						<th scope="col">type</th>
+						<th scope="col">value</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="pgn : ${pgns}">
+
+						<td scope="row" th:text=${pgn.pgn_pk}>-</td>
+						<td scope="row" th:text=${pgn.plant}>-</td>
+						<td scope="row" th:text=${pgn.seton}>-</td>
+						<td scope="row" th:text=${pgn.type}>-</td>
+						<td scope="row" th:text=${pgn.value}>-</td>
+						 <td>
+                        <form></form>
+                      	 <form th:action="@{/insertPgn}" th:id="|edit_pgn_${pgn.pgn_pk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="pgn_pk" th:value="${pgn.pgn_pk}">
+                       		<input type="hidden" name="plant" th:value="${pgn.plant}">
+		                    <input type="hidden" name="seton" th:value="${pgn.seton}">
+		                    <input type="hidden" name="type" th:value="${pgn.type}">
+		                    <input type="hidden" name="value" th:value="${pgn.value}">
+		                    
+		                    <a href="#"  th:onclick="|document.getElementById('edit_pgn_${pgn.pgn_pk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertPgn}" th:id="|delete_pgn_${pgn.pgn_pk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="pgn_pk" th:value="${pgn.pgn_pk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_pgn_${pgn.pgn_pk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

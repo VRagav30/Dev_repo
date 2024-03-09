@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+<head>
+<title>Generate Material Report</title>
+</head>
+
+
+<body >
+<div layout:fragment="content">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function orgChange() {
+    var org = $("#org").val();
+    $.get( "/plant?org=" + org, function( data ) {
+        $("#plant").empty();
+        var option = "<option default>Please Select...</option>";
+        $("#plant").append(option);
+        data.forEach(function(item, i) {
+            var option = "<option value = " + item + ">" + item +  "</option>";
+            $("#plant").append(option);
+        });
+    });
+    
+    $.get( "/year?org=" + org, function( data ) {
+        $("#year").empty();
+        data.forEach(function(item, i) {
+            var option = "<option value = " + item + ">" + item +  "</option>";
+            $("#year").append(option);
+        });
+    });
+};
+
+function yearChange() {
+	var org = $("#org").val();
+	var year = $("#year").val();
+    $.get( "/period?org=" + org+"&year=" + year, function( data ) {
+        $("#period").empty();
+        data.forEach(function(item, i) {
+        	//alert(item);
+        	var fydPeriod = JSON.parse(JSON.stringify(item));
+        	//var fromdate = fydPeriod.fromdate.split("-")[2]+"/"+fydPeriod.fromdate.split("-")[1]+"/"+fydPeriod.fromdate.split("-")[0];
+        	//var todate = fydPeriod.todate.split("-")[2]+"/"+fydPeriod.todate.split("-")[1]+"/"+fydPeriod.todate.split("-")[0];
+            //var option = "<option value = " + fydPeriod.period + ">" + fromdate+"-"+todate +  "</option>";
+            var option = "<option value = " + fydPeriod.period + ">" + fydPeriod.period +  "</option>";
+            //alert(option);
+            $("#period").append(option);
+        });
+    });
+};
+
+$(document).ready(function() {
+    $("#org").change(function() {
+    	//alert("hi");
+        orgChange();
+    });
+    $("#year").change(function() {
+    	//alert("hi");
+        yearChange();
+    });
+});
+</script>
+
+
+	<div align="center">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Generate Material Report</h2>
+						<form method="post" th:action="@{/generateMaterialReport}"
+							enctype="multipart/form-data">
+							<div class="form-group">
+								<table border=1, bordercollapse=collapse style= "background-color:#C6EEF6;">
+									<tr>
+										<td style="width: 198px;">Organization</td>
+										<td style="width: 199px; text-align: left;"><select
+											id="org" name="org" th:value=${{org}} >
+												<option default>Please select...</option>
+												<option th:each="org : ${orgs}" th:value="${org.orgncode}" th:selected="${selectedOrg==org.orgncode}"
+													th:utext="${org.sname}" </option>
+																								
+										</select></td>
+										
+									</tr>
+									<tr>
+										<td style="width: 198px;">Plant</td>
+										<td style="width: 199px; text-align: left;"><select
+											id="plant" name="plant" th:value=${{plant}}>
+												<option default>Please select...</option>
+												<option th:each="plant :${plants}" th:value="${plant.plant}" th:selected="${selectedPlant==plant.plant}"
+												th:utext="${plant.sname}" </option>
+												
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">YEAR</td>
+										<td style="width: 199px;"><select id="year" name="year">
+										<option default>Please select...</option>
+										 <option th:each="year :${years}" th:value="${year}" th:selected="${selectedYear==year}"
+												th:utext="${year}" </option>
+												
+										
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">Period</td>
+										<td style="width: 199px;"><select id="period" name="period">
+										<option default>Please select...</option>
+										<option th:each="period :${periods}" th:value="${period.period}" th:selected="${selectedPeriod==period.period}"
+												th:utext="${period.period}" </option>
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">MATERIAL</td>
+										<td style="width: 199px;"><select id="mat" name="mat"
+											th:value=${{mat}}>
+												<option default>Please select...</option>
+												<option  th:each="mat : ${mats}" th:value="${mat.matlcode}"th:selected="${selectedMaterial==mat.matlcode}"
+													th:utext="${mat.sname}" />
+										</select></td>
+									</tr>
+
+									<tr>
+										<td style="width: 198px;">STOCK TYPE</td>
+										<td style="width: 199px;"><label for="stocktype"></label><select
+											id="stocktype" name="stocktype">
+
+												<option default value="Please Select...">Please select...</option>
+												<option value="O">O</option>
+												<option value="OV">OV</option>
+												<option value="S">S</option>
+												<option value="SV">SV</option>
+										</select></td>
+									</tr>
+
+									<tr>
+										<td style="width: 198px;">SOASSIGNMENT</td>
+										<td style="width: 199px;"><input type="text" id="soa"
+											name="soa"><br></td>
+										</select>
+										</td>
+									</tr>
+									<tr align="center">
+										<td colspan="2"><button type="submit"  name="action" value="material">GENERATE MATERIAL
+												REPORT</button></td>
+									</tr>
+									
+									
+									
+									</table>
+									</div>
+									</form>
+									</div>
+									</div>
+									</div>
+									</section>
+									</div>
+									</div>
+									</body>
+									</html>
+									

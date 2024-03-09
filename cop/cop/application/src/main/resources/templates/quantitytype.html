@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="quantitytype">
+	
+<head>
+<meta charset="ISO-8859-1">
+<title>QunatityType Report</title>
+</head>
+<body style= "background-color:#C6EEF6;">
+
+<h2>Quantity type report</h2>
+<h3><label>Org: </label><label th:text="${org}"></label><br/>
+<label>Plant: </label><label th:text="${plant}"></label><br/>
+<label>Year: </label><label th:text="${year}"></label><br/>
+<label>Period: </label><label th:text="${period}"></label><br/>
+<label>Quantity Type: </label><label th:text="${qtyType}"></label></h3>
+<table cellspacing="1" border="1" style="height: 227px;" width="433" >
+<tr>
+<td style="width: 47.625px;">Itemcode</td>
+<td style="width: 47.625px;">valsub</td>
+<td style="width: 47.625px;">batch</td>
+<td style="width: 47.625px;">stocktype</td>
+<td style="width: 47.625px;">saleorder&nbsp;</td>
+<td style="width: 47.625px;">plant</td>
+<td style="width: 47.625px;">buqty</td>
+<td style="width: 47.625px;">totalamount</td>
+</tr>
+<tr th:each="x: ${qResults}">
+   <td th:text="${x[0]}"></td>
+   <td th:text="${x[1]}"></td>
+   <td th:text="${x[2]}"></td>
+   <td th:text="${x[3]}"></td>
+   <td th:text="${x[4]}"></td>
+   <td th:text="${x[5]}"></td>
+   <td th:text="${x[6]}"></td>
+   <td><a th:text="${x[7]}" th:href="@{/generatePcbValuesReport(qtyType=${qtyType}, atpk=${x[8]})}"></a></td>
+</tr>
+
+</table>
+
+</body>
+</html>

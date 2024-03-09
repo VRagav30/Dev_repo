@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>Currency</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>VENDOR</h1>
+            
+        
+            <form action="#"th:action="@{/insertVendor}"th:object="${ven}"method="post"class="form">
+            
+            <div class="form-group">
+                    
+                    <input class="form-control"type="text"th:field="*{address1}"id="address1"placeholder="Address 1"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address1')}"th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    
+                    <input class="form-control"type="text"th:field="*{address2}"id="address2"placeholder="Address 2"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address2')}"th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <input class="form-control"type="text"th:field="*{address3}"id="address3"placeholder="Address 3"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address3')}"th:errors="*{integer}"></div>
+                </div>
+                
+               <div class="form-group">
+                    
+                    <input class="form-control"type="text"th:field="*{address4}"id="address4"placeholder="Address 4"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address4')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="govrn1">Any authentic Govt. recognised number 1</label>
+                    <input class="form-control"type="text"th:field="*{govrn1}"id="govrn1"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('govrn1')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgncode">Organisation Code</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ostat">ORGANISATION STATUS</label>
+                   <input  type="radio"th:field="*{ostat}"id="ostat"name="ostat1"value="TRIVIAL">
+					<label for="ostat1">TRIVIAL</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat2"value="ACTIVE">
+					<label for="ostat2">ACTIVE</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat3"value="DORMANT">
+					<label for="ostat3">DORMANT</label><br>
+					<div class="alert alert-warning"th:if="${#fields.hasErrors('ostat')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vendortyp">PARTNER FUNCTION</label>
+                    <input  type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp1"value="OUTRIGHT">
+					<label for="vendortyp1">OUTRIGHT</label><br>
+					<input type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp2"value="SUBCON">
+					<label for="vendortyp2">SUBCON</label><br>
+					<input type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp3"value="SERVICES">
+					<label for="vendortyp3">SERVICES</label><br>
+					<input type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp4"value="CUSTOMER">
+					<label for="vendortyp4">CUSTOMER</label><br>
+					<div class="alert alert-warning"th:if="${#fields.hasErrors('vendortyp')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="plant">PLANT</label>
+                    <input class="form-control"type="text"th:field="*{plant}"id="plant"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('plant')}"th:errors="*{integer}"></div>
+                </div>
+                
+                
+                
+                <div class="form-group">
+                    <label for="vendor">VENDOR</label>
+                    <input class="form-control"type="text"th:field="*{vendor}"id="vendor"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('vendor')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lname">LONG NAME</label>
+                    <input class="form-control"type="text"th:field="*{lname}"id="lname"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('lname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vendortyp">VENDOR TYPE</label>
+                    <input  type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp1"value="DOMESTIC">
+					<label for="vendortyp1">DOMESTIC</label><br>
+					<input type="radio"th:field="*{vendortyp}"id="vendortyp"name="vendortyp2"value="FOREIGN">
+					<label for="vendortyp2">FOREIGN</label><br><div class="alert alert-warning"th:if="${#fields.hasErrors('vendortyp')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vendortypd">DESCRIPTION</label>
+                    <input class="form-control"type="text"th:field="*{vendortypd}"id="vendortypd"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('vendortypd')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vengrp">VENDOR GROUP</label>
+                    <input class="form-control"type="text"th:field="*{vengrp}"id="vengrp"placeholder="integer"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('vengrp')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

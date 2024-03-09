@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap Elegant Table Design</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+<p>
+<p>
+
+<br>
+<form th:action="@{/searchFyd}" method="get">
+
+<button  style="float: left;"><a th:href="@{/insertFyd}"> ADD </a></button>
+  <input  type="text"  name="keyword" th:value="${keyword}"  placeholder="Find by FydCode" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+ </form>
+  <br>
+ <form method="post" th:action="@{/findFyd}">
+			
+    <div class="table-responsive">
+        <div class="table-wrapper">			
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <!-- <th>FYDPK</th> -->
+                        <th>FYDCODE <i class="fa fa-sort"></i></th>
+                        <th>FYDTYP</th>
+                        <th>NUMPER <i class="fa fa-sort"></i></th>
+                        <th>FROM MONTH</th>
+                        <th>TO MONTH <i class="fa fa-sort"></i></th>
+                        <th>YEAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr th:each="fyd : ${fyds}">
+						<td scope="row" style="display:none;" th:text=${fyd.fydpk}>-</td>
+						<td scope="row" th:text=${fyd.fydcode}>-</td>
+						<td scope="row" th:text=${fyd.fydtyp}>-</td>
+						<td scope="row" th:text=${fyd.numper}>-</td>
+						<td scope="row" th:text=${fyd.frommonth}>-</td>
+						<td scope="row" th:text=${fyd.tomonth}>-</td>
+						<td scope="row" th:text=${fyd.year}>-</td>
+                        <td>
+                        <form></form>
+                      	 <form th:action="@{/insertFyd}" th:id="|edit_fyd_${fyd.fydpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="fydpk" th:value="${fyd.fydpk}">
+                       		<input type="hidden" name="fydcode" th:value="${fyd.fydcode}">
+		                    <input type="hidden" name="fydtyp" th:value="${fyd.fydtyp}">
+		                    <input type="hidden" name="numper" th:value="${fyd.numper}">
+		                    <input type="hidden" name="frommonth" th:value="${fyd.frommonth}">
+		                    <input type="hidden" name="tomonth" th:value="${fyd.tomonth}">
+		                    <input type="hidden" name="year" th:value="${fyd.year}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_fyd_${fyd.fydpk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertFyd}" th:id="|delete_fyd_${fyd.fydpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="fydpk" th:value="${fyd.fydpk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_fyd_${fyd.fydpk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+                    </tr>
+                          
+                </tbody>
+            </table>
+            
+    	</div>        
+	</div>   
+	
+	</form>  
+</body>
+</html>

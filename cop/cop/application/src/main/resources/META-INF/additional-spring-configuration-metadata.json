@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "order.header.columns",
+    "type": "java.lang.String",
+    "description": "A description for 'order.header.columns'"
+  },
+  {
+    "name": "cost.total.columns",
+    "type": "java.lang.String",
+    "description": "A description for 'cost.total.columns'"
+  },
+  {
+    "name": "mm.total.columns",
+    "type": "java.lang.String",
+    "description": "A description for 'mm.total.columns'"
+  }
+]}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>SERVICE ITEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>SERVICE ITEM</h1>
+            
+        
+            <form action="#"th:action="@{/insertServiceItem}"th:object="${ser}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+                <div class="form-group">
+                    <label for="activeind">Active Indicator</label>
+                    <input  type="radio"th:field="*{activeind}"id="activeind"name="activeind1"value="ACTIVE">
+					<label for="activeind1">ACTIVE</label><br>
+					<input type="radio"th:field="*{activeind}"id="activeind"name="activeind2"value="NA">
+					<label for="activeind2">NA</label><br>
+					 <div class="alert alert-warning"th:if="${#fields.hasErrors('activeind')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="buom">Unit Of Measure</label>
+                    <input class="form-control"type="String"th:field="*{buom}"id="buom"placeholder="unit of measure"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('buom')}"th:errors="*{integer}"></div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="lname">Long Name</label>
+                    <input class="form-control"type="text"th:field="*{lname}"id="lname"placeholder="Long Name"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('lname')}"th:errors="*{String}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="coslot">Costing lot </label>
+                    <input class="form-control"type="number"th:field="*{coslot}"id="coslot"placeholder="Costing lot"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('coslot')}"th:errors="*{number}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="oboind">Out Right Bought Out indicator </label><br>
+                    <input  type="radio"th:field="*{oboind}"id="oboind"name="oboind1"value="YES">
+					<label for="oboind1">YES</label>
+					<input type="radio"th:field="*{oboind}"id="oboind"name="oboind2"value="NO">
+					<label for="oboind2">NO</label><br><div class="alert alert-warning"th:if="${#fields.hasErrors('oboind')}"th:errors="*{String}"></div>
+                </div>
+                
+               <div class="form-group">
+                    <label for="plant">Plant</label>
+                    <input class="form-control"type="text"th:field="*{plant}"id="plant"placeholder="Plant"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('plant')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sercode">Service </label>
+                    <input class="form-control"type="text"th:field="*{sercode}"id="sercode"placeholder="Service"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sercode')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sertyp">Service Type</label>
+                    <input class="form-control"type="text"th:field="*{sertyp}"id="sertyp"placeholder="Service Type"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sertyp')}"th:errors="*{text}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="sname">Short Name</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="Short Name"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{text}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="typed">Type Description</label>
+                    <input class="form-control"type="text"th:field="*{typed}"id="typed"placeholder="Description"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('typed')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valgrp">Val Group</label>
+                    <input class="form-control"type="number"th:field="*{valgrp}"id="valgrp"placeholder="Val group"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valgrp')}"th:errors="*{number}"></div>
+                </div>
+                
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

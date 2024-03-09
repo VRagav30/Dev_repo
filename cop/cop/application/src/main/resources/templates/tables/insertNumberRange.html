@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>NUMBER RANGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>NUMBER RANGE</h1>
+            
+        
+            <form action="#"th:action="@{/insertNumberRange}"th:object="${nr}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+                  <div class="form-group">
+                    <label for="rangeid">RANGE ID</label>
+                    <input class="form-control"type="number"th:field="*{rangeid}"id="rangeid"placeholder="Range Id" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('rangeid')}"th:errors="*{number}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rangefrom">RANGE FROM</label>
+                    <input class="form-control"type="number"th:field="*{rangefrom}"id="rangefrom"placeholder="Range From" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('rangefrom')}"th:errors="*{number}"></div>
+                </div>
+                
+                
+                 <div class="form-group">
+                    <label for="rangeto">RANGE TO</label>
+                    <input class="form-control"type="number"th:field="*{rangeto}"id="rangeto"placeholder="Range To" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('rangeto')}"th:errors="*{number}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="numtype">Num Type</label><br>
+                    <input  type="radio"th:field="*{numtype}"id="numtype"name="numtype1"value="INTERNAL">
+					<label for="numtype1">INTERNAL</label>
+					<input type="radio"th:field="*{numtype}"id="numtype"name="numtype2"value="EXTFREE">
+					<label for="EXTFREE">GI</label>
+					
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('numtype')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="numobject">FUNCTION</label>
+                    <select class="form-control"  id="numobject" name="numobject" th:field="*{numobject}" >
+    					<option value="MMTOTALDOC">MMTOTALDOC</option>
+					    <option value="SALE">SALE</option>
+					    <option value="COSTTOTALDOC">COSTTOTALDOC</option>
+					    <option value="PUR">PURCHASE</option>
+					    <option value="PROD">PRODUCTION</option>
+					    <option value="REWORK">REWORK</option>
+					    <option value="SRO">SRO</option>
+					    <option value="STO">STO</option>
+					    <option value="VENDOR">VENDOR</option>
+					    <option value="CUSTOMER">CUSTOMER</option>
+					    <option value="ORDOPRN">ORDOPRN</option>
+					    <option value="JOB">JOB</option>
+					    
+    <div class="alert alert-warning"th:if="${#fields.hasErrors('numobject')}"th:errors="*{integer}"></div>
+                </div>
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

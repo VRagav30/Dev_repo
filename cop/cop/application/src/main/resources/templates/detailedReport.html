@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+<div layout:fragment="content">
+<div th:fragment="detailedReport">
+<div>
+<h1> Material Quantity report generated for </h1>
+<h5><label>Org:&nbsp </label><label th:text="${selectedOrg}"></label>&nbsp
+<label>Plant: &nbsp</label><label th:text="${selectedPlant}"></label>&nbsp
+<label>Year:&nbsp </label><label th:text="${year}"></label>&nbsp
+<label>Period:&nbsp </label><label th:text="${period}"></label>&nbsp
+<label>Material:&nbsp </label><label th:text="${mat}"></label>&nbsp
+</div>	
+
+
+
+	<div th:if="${dResults!=null && !dResults.empty}">
+		<table border=1, bordercollapse=collapse
+			style="background-color: WHITE;">
+			<thead>
+				<tr>
+					<th>MM DOCNUM</th>
+					<th>MM DOC ITNUM</th>
+					<th>DATE</th>
+					<th>DOCUOM</th>
+					<th>DOCUOM QTY</th>
+					<th>OBJTYPE</th>
+					<th>OBJNUM</th>
+					<th>OBJITNUM</th>
+					<th>PLANT</th>
+					<th>MATERIAL</th>
+					<th>STOCK TYPE</th>
+					<th>SALE ORDER</th>
+					<th>VALSUB</th>
+					<th>BATCHNUMBER</th>
+					<th>BUOM</th>
+					<th>OPENING STOCK</th>
+					<th>PROCUREMENT RECEIPTS</th>
+					<th>JOB RECEIPTS</th>
+					<th>PROD RECEIPTS</th>
+					<th>STO RECEIPTS</th>
+					<th>STO IN TRANSIT</th>
+					<th>TRANSFER RECEIPTS</th>
+					<th>PROCUREMENT RETURN</th>
+					<th>JOB CONSUMPTION</th>
+					<th>PROD CONSUMPTION</th>
+					<th>STO DELIVERY</th>
+					<th>SALE RETURN</th>
+					<th>TRANSFER DELIVERY</th>
+					<th>SALE DELIVERY</th>
+					<th>COST CENTER CONSUMPTION</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="dResult : ${dResults}">
+					<td th:text=${dResult[0]}>-</td>
+					<td th:text=${dResult[1]}>-</td>
+					<td th:text=${dResult[2]}>-</td>
+					<td th:text=${dResult[3]}>-</td>
+					<td th:text=${dResult[4]}>-</td>
+					<td th:text=${dResult[5]}>-</td>
+					<td th:text=${dResult[6]}>-</td>
+					<td th:text=${dResult[7]}>-</td>
+					<td th:text=${dResult[8]}>-</td>
+					<td th:text=${dResult[9]}>-</td>
+					<td th:text=${dResult[10]}>-</td>
+					<td th:text=${dResult[11]}>-</td>
+					<td th:text=${dResult[12]}>-</td>
+					<td th:text=${dResult[13]}>-</td>
+					<td th:text=${dResult[14]}>-</td>
+					<td th:text=${dResult[15]}>-</td>
+					<td th:text=${dResult[16]}>-</td>
+					<td th:text=${dResult[17]}>-</td>
+					<td th:text=${dResult[18]}>-</td>
+					<td th:text=${dResult[19]}>-</td>
+					<td th:text=${dResult[20]}>-</td>
+					<td th:text=${dResult[21]}>-</td>
+					<td th:text=${dResult[22]}>-</td>
+					<td th:text=${dResult[23]}>-</td>
+					<td th:text=${dResult[24]}>-</td>
+					<td th:text=${dResult[25]}>-</td>
+					<td th:text=${dResult[26]}>-</td>
+					<td th:text=${dResult[27]}>-</td>
+					<td th:text=${dResult[28]}>-</td>
+					<td th:text=${dResult[29]}>-</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	</html>
+	

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>Batch Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>Batch</h1>
+            
+        
+            <form th:action="@{/insertBatch}" th:object="${bat}"method="post"class="form">
+            
+                        
+                <div class="form-group">
+                    <label for="orgncode">ORGANISATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemcode">MATERIAL</label>
+                    <input class="form-control"type="text"th:field="*{itemcode}"id="itemcode"placeholder="MATERIAL"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('itemcode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="batch">BATCH</label>
+                    <input class="form-control"type="text"th:field="*{batch}"id="batch"placeholder="BATCH"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('batch')}"th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="valsub">VALSUB</label>
+                    <input class="form-control"type="text"th:field="*{valsub}"id="valsub"placeholder="VALSUB"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valsub')}"th:errors="*{integer}"></div>
+                </div>
+                 <div class="form-group">
+                    <label for="valfdate">VALID FROM</label>
+                    <input class="form-control"type="date"th:field="*{valfdate}"id="valfdate"placeholder="VALID FROM"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valfdate')}"th:errors="*{valfdate}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deletionindicator">Deletion Indicator</label>
+                    <input class="form-control"deletionindicator="text"th:field="*{deletionindicator}"id="deletionindicator"placeholder="Deletion Indicator"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('deletionindicator')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="batchcosting">Is Batch Costing Allowed </label><br>
+                    <input  type="radio"th:field="*{batchcosting}"id="batchcosting"name="batchcosting1"value="YES">
+					<label for="batchcosting1">YES</label>
+					<input type="radio"th:field="*{batchcosting}"id="batchcosting"name="batchcosting2"value="NO">
+					<label for="batchcosting2">NO</label>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('batchcosting')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="soassignment">SALE ORDER ASSIGNMENT NUMBER</label>
+                    <input class="form-control"type="number"th:field="*{soassignment}"id="soassignment"placeholder="SALE ORDER ASSIGNMENT NUMBER"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('soassignment')}"th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"   th:value="${mode}" name="mode">
+                </div>
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

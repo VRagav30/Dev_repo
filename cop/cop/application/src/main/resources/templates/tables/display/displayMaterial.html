@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MATERIAL</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchMaterial}" method="get">
+<button  style="float: left;"><a th:href="@{/insertMaterial}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Material or Type" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  
+ <br><br>
+		<div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Material}" enctype="multipart/form-data">
+		<input type="file" name="file">
+			<button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+		</form><br><br>
+		<form method="post" th:action="@{/findMaterial}">
+			<h1>MATERIAL</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">batch</th>
+						<th scope="col">batchcosting</th>
+						<th scope="col">bomal</th>
+						<th scope="col">buom</th>
+						<th scope="col">byproduct</th>
+						<th scope="col">coprind</th>
+						<th scope="col">coslot</th>
+						<th scope="col">ignocost</th>
+						<th scope="col">lname</th>
+						<th scope="col">matlcode</th>
+						<th scope="col">matpk</th>
+						<th scope="col">mattyp</th>
+						<th scope="col">oboind</th>
+						<th scope="col">ostat</th>
+						<th scope="col">plant</th>
+						<th scope="col">prcsind</th>
+						<th scope="col">prdind</th>
+						<th scope="col">profitcr</th>
+						<th scope="col">scallow</th>
+						<th scope="col">sname</th>
+						<th scope="col">trplant</th>
+						<th scope="col">typed</th>
+						<th scope="col">utpcost</th>
+						<th scope="col">valgrp</th>
+						<th scope="col">valsub</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="mat: ${mats}">
+
+						<td scope="row" th:text=${mat.batch}>-</td>
+						<td scope="row" th:text=${mat.batchcosting}>-</td>
+						<td scope="row" th:text=${mat.bomal}>-</td>
+						<td scope="row" th:text=${mat.buom}>-</td>
+						<td scope="row" th:text=${mat.byproduct}>-</td>
+						<td scope="row" th:text=${mat.coprind}>-</td>
+						<td scope="row" th:text=${mat.coslot}>-</td>
+						<td scope="row" th:text=${mat.ignocost}>-</td>
+						<td scope="row" th:text=${mat.lname}>-</td>
+						<td scope="row" th:text=${mat.matlcode}>-</td>
+						<td scope="row" th:text=${mat.matpk}>-</td>
+						<td scope="row" th:text=${mat.mattyp}>-</td>
+						<td scope="row" th:text=${mat.oboind}>-</td>
+						<td scope="row" th:text=${mat.ostat}>-</td>
+						<td scope="row" th:text=${mat.plant}>-</td>
+						<td scope="row" th:text=${mat.prcsind}>-</td>
+						<td scope="row" th:text=${mat.prdind}>-</td>
+						<td scope="row" th:text=${mat.profitcr}>-</td>
+						<td scope="row" th:text=${mat.scallow}>-</td>
+						<td scope="row" th:text=${mat.sname}>-</td>
+						<td scope="row" th:text=${mat.trplant}>-</td>
+						<td scope="row" th:text=${mat.typed}>-</td>
+						<td scope="row" th:text=${mat.utpcost}>-</td>
+						<td scope="row" th:text=${mat.valgrp}>-</td>
+						<td scope="row" th:text=${mat.valsub}>-</td>
+						<td>
+						<form></form>
+                        <form th:action="@{/insertMaterial}" th:id="|edit_mat_${mat.matpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="batch" th:value="${mat.batch}">
+                       		<input type="hidden" name="batchcosting" th:value="${mat.batchcosting}">
+		                    <input type="hidden" name="bomal" th:value="${mat.bomal}">
+		                    <input type="hidden" name="buom" th:value="${mat.buom}">
+		                    <input type="hidden" name="byproduct" th:value="${mat.byproduct}">
+		                    <input type="hidden" name="coprind" th:value="${mat.coprind}">
+		                    <input type="hidden" name="coslot" th:value="${mat.coslot}">
+		                    <input type="hidden" name="ignocost" th:value="${mat.ignocost}">
+		                    <input type="hidden" name="lname" th:value="${mat.lname}">
+		                    <input type="hidden" name="matlcode" th:value="${mat.matlcode}">
+		                    <input type="hidden" name="oboind" th:value="${mat.oboind}">
+		                    <input type="hidden" name="ostat" th:value="${mat.ostat}">
+		                    <input type="hidden" name="plant" th:value="${mat.plant}">
+		                    <input type="hidden" name="prcsind" th:value="${mat.prcsind}">
+		                    <input type="hidden" name="prdind" th:value="${mat.prdind}">
+		                    <input type="hidden" name="profitcr" th:value="${mat.profitcr}">
+		                    <input type="hidden" name="scallow" th:value="${mat.scallow}">
+		                     <input type="hidden" name="sname" th:value="${mat.sname}">
+		                      <input type="hidden" name="utpcost" th:value="${mat.utpcost}">
+		                       <input type="hidden" name="typed" th:value="${mat.typed}">
+		                        <input type="hidden" name="trplant" th:value="${mat.trplant}">
+		                         <input type="hidden" name="valgrp" th:value="${mat.valgrp}">
+		                          <input type="hidden" name="valsub" th:value="${mat.valsub}">
+		                    <a href="#" th:data-elementid="|edit_mat_${mat.matpk}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    	
+              			</form>
+              			</td>
+                    	<td>
+                        	<form th:action="@{/insertMaterial}" th:id="|delete_mat_${mat.matpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="matpk" th:value="${mat.matpk}">
+		                     <a href="#" th:data-elementid="|delete_mat_${mat.matpk}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                    		</form>
+                        </td>
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

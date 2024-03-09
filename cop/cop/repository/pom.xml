@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cop</groupId>
+    <artifactId>costing</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>repository</artifactId>
+  <name>repository</name>
+  <description>This module contains repository classes for application.</description>
+  <packaging>jar</packaging>
+    <dependencies>  
+      <!-- Project modules -->  
+      <dependency>  
+        <groupId>com.cop</groupId>  
+        <artifactId>model</artifactId>  
+        <version>${project.version}</version>  
+      </dependency>  
+  
+      <!-- Spring Boot dependencies -->  
+      
+       <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+  
+    </dependencies>  
+</project>

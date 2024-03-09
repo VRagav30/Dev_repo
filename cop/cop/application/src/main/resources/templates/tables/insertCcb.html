@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>CCB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>Cost Center Breakup</h1>
+            
+        
+            <form action="#"th:action="@{/insertCcb}"th:object="${ccb}"method="post"class="form">
+            
+            <div class="form-group">
+            
+            <div class="form-group">
+                    <label for="ccbcode">PCB Group Number</label>
+                    <input class="form-control"type="number"th:field="*{ccbcode}"id="ccbcode"placeholder="PCB Group Number"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('ccbcode')}"th:errors="*{ccbcode}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ccbn">Description</label>
+                    <input class="form-control"type="text"th:field="*{ccbn}"id="ccbn"placeholder="Description"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('ccbn')}"th:errors="*{integer}"></div>
+                </div>
+                 
+              <div class="form-group">
+                    <label for="cagrp">Cost Account Group</label>
+                    <input class="form-control"type="text"th:field="*{cagrp}"id="cagrp"placeholder="Cost Account Group"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cagrp')}"th:errors="*{String}"></div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="cagrd">Cost Account Group Description</label>
+                    <input class="form-control"type="text"th:field="*{cagrd}"id="cagrd"placeholder="Cost Account Group Description"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cagrd')}"th:errors="*{integer}"></div>
+                </div>
+                
+               
+                <div class="form-group">
+                    <label for="opgrp">Operation Group</label>
+                    <input class="form-control"type="text"th:field="*{opgrp}"id="opgrp"placeholder="Field Map"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('opgrp')}"th:errors="*{filedmap}"></div>
+                </div>
+                
+                      <div class="form-group">
+                    <label for="ccbgrm">CCB GRM</label><br>
+                   <input  type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm1"value="F">
+                   <label for="ccbgrm1">FIXED</label>
+                   <input  type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm1"value="V">
+					<label for="ccbgrm2">VARIABLE</label>
+					 <input  type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm1"value="B">
+					<label for="ccbgrm3">BOTH</label>
+					<div class="alert alert-warning"th:if="${#fields.hasErrors('ccbgrm')}"th:errors="*{String}"></div>
+                 
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

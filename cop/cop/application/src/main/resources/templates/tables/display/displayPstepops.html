@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROCESS STEP OPERATIONS</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchPstepops}" method="get">
+	<button  style="float: left;"><a th:href="@{/insertPstepops}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by operation name" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findPstepops}">
+			<h1>PROCESS STEP OPERATIONS</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">opname</th>
+						<th scope="col">opqty</th>
+						<th scope="col">opuom</th>
+						<th scope="col">prcsnum</th>
+						<th scope="col">prcsstepcode</th>
+						<th scope="col">prcsstepopscode</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="pop: ${pops}">
+						<td scope="row" th:text=${pop.opname}>-</td>
+						<td scope="row" th:text=${pop.opqty}>-</td>
+						<td scope="row" th:text=${pop.opuom}>-</td>
+						<td scope="row" th:text=${pop.prcsnum}>-</td>
+						<td scope="row" th:text=${pop.prcsstepcode}>-</td>
+						<td scope="row" th:text=${pop.prcsstepopscode}>-</td>
+						<form></form>
+						 <td>
+                        <form th:action="@{/insertPstepops}" th:id="|edit_pop_${pop.prcsstepopscode}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="opname" th:value="${pop.opname}">
+                       		<input type="hidden" name="opqty" th:value="${pop.opqty}">
+		                    <input type="hidden" name="opuom" th:value="${pop.opuom}">
+		                    <input type="hidden" name="prcsnum" th:value="${pop.prcsnum}">
+		                    <input type="hidden" name="prcsstepcode" th:value="${pop.prcsstepcode}">
+		                    <input type="hidden" name="prcsstepopscode" th:value="${pop.prcsstepopscode}">
+		                    <a href="#" th:data-elementid="|edit_pop_${pop.prcsstepopscode}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> </a>
+              			</form>
+              			</td>
+                    	<td>
+                        	<form th:action="@{/insertPstepops}" th:id="|delete_pop_${pop.prcsstepopscode}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="prcsstepopscode" th:value="${pop.prcsstepopscode}">
+		                     <a href="#" th:data-elementid="|delete_pop_${pop.prcsstepopscode}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                    		</form>
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+		</form>
+</body>
+</html>

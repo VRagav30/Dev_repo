@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>OPG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>OPERATIONS</h1>
+            
+        
+            <form action="#"th:action="@{/insertOprn}"th:object="${operation}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+               <div class="form-group">
+                    <label for="orgncode">Organisation Code</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="Organisation Code"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{String}"></div>
+                </div>
+                
+               <div class="form-group">
+                    <label for="oprn">Operation Name</label>
+                    <input class="form-control"type="text"th:field="*{oprn}"id="oprn"placeholder="Operation Name"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('oprn')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">Short Name</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="Short Name"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lname">Long Name</label>
+                    <input class="form-control"type="text"th:field="*{lname}"id="lname"placeholder="Long Name"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('lname')}"th:errors="*{String}"></div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="valtdate">TO DATE</label>
+                    <input class="form-control"type="date"th:field="*{valtdate}"id="valtdate"placeholder="TO DATE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valtdate')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgncode">ORGANSATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{opuom}"id="opuom"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('opuom')}"th:errors="*{integer}"></div>
+                </div>
+                
+               <div class="form-group">
+                    <label for="ostat">ORGANISATION STATUS</label>
+                    <input  type="radio"th:field="*{ostat}"id="ostat"name="ostat1"value="TRIVIAL">
+					<label for="ostat1">TRIVIAL</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat2"value="ACTIVE">
+					<label for="ostat2">ACTIVE</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat3"value="DORMANT">
+					<label for="ostat3">DORMANT</label>
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('ostat')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="opuom">ORGANSATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{opuom}"id="opuom"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('opuom')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="costacc">Cost Account</label>
+                    <input class="form-control"type="number"th:field="*{costacc}"id="costacc"placeholder="Group Description"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('costacc')}"th:errors="*{Costacc}"></div>
+                </div> 
+                
+                 <div class="form-group">
+                    <label for="pricebase">Pricebase</label><br>
+                   <input  type="radio"th:field="*{pricebase}"id="pricebase"name="pricebase1"value="A">
+					<label for="pricebase1">Actual</label><br>
+					<input type="radio"th:field="*{pricebase}"id="pricebase"name="pricebase2"value="P">
+					<label for="pricebase2">Plan</label><br>
+					
+					<div class="alert alert-warning"th:if="${#fields.hasErrors('pricebase')}"th:errors="*{String}"></div>
+                </div> 
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+                 </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

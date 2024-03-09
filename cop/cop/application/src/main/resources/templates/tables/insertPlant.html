@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>PLANT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>PLANT</h1>
+            
+        
+            <form action="#"th:action="@{/insertPlant}"th:object="${pl}"method="post"class="form">
+            
+            <div class="form-group">
+                
+                 <div class="form-group">
+                    <label for="plant">Plant</label>
+                    <input class="form-control"type="text"th:field="*{plant}"id="plant"placeholder="PLANT"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('plant')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orgncode">ORGANSATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="SHORT NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{integer}"></div>
+                </div>
+                
+               
+                
+                
+                <div class="form-group">
+                    <label for="address1">Address 1</label>
+                    <input class="form-control"type="text"th:field="*{address1}"id="address1"placeholder="ADDRESS 1"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address1')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address2">Address 2</label>
+                    <input class="form-control"type="text"th:field="*{address2}"id="address2"placeholder="ADDRESS 2"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address2')}"th:errors="*{Text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address3">Address 3</label>
+                    <input class="form-control"type="text"th:field="*{address3}"id="address3"placeholder="Address 3"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('address3')}"th:errors="*{Text}"></div>
+                </div>
+                
+               
+                
+                 <div class="form-group">
+                    <label for="ustypd">Usage Type Description</label>
+                    <input class="form-control" type="text" th:field="*{ustypd}" id="ustypd" placeholder="Usage Type Description" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('ustypd')}" th:errors="*{fullName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="ustyp">Usage Type</label>
+                    <input class="form-control" type="text" th:field="*{ustyp}" id="ustyp" placeholder="USAGE TYPE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('ustyp')}" th:errors="*{ustyp}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="govrn1">GOVT 1</label>
+                    <input class="form-control" type="text" th:field="*{govrn1}" id="govrn1" placeholder="GOVT 1" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('govrn1')}" th:errors="*{govrn1}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="govrn2">GOVT 2</label>
+                    <input class="form-control" type="text" th:field="*{govrn2}" id="govrn2" placeholder="GOVT 2" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('govrn2')}" th:errors="*{govrn2}"></div>
+                </div>
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+                
+                         <input type="submit" class="btn btn-success"value="Add">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

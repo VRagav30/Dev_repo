@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CURRENCY EXCHANGE RATE</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchCurrencyER}" method="get">
+<button  style="float: left;"><a th:href="@{/insertCurrencyER}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Source or Target Currency" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  <br><br>
+  <div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Batch}" enctype="multipart/form-data">
+		<input type="file" name="file"> <button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+		</form>
+		<form method="post" th:action="@{/findCurrencyER}">
+			<h1>CURRENCY EXCHNAGE RATE</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+
+						<th scope="col">curexchratepk</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">scnos</th>
+						<th scope="col">scurr</th>
+						<th scope="col">tcurr</th>
+						<th scope="col">tcurrv</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="cer : ${cers}">
+
+						<td scope="row" th:text=${cer.curexchratepk}>-</td>
+						<td scope="row" th:text=${cer.orgncode}>-</td>
+						<td scope="row" th:text=${cer.scnos}>-</td>
+						<td scope="row" th:text=${cer.scurr}>-</td>
+						<td scope="row" th:text=${cer.tcurr}>-</td>
+						<td scope="row" th:text=${cer.tcurrv}>-</td>
+						<td scope="row" th:text=${cer.valfdate}>-</td>
+						<td scope="row" th:text=${cer.valtdate}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertCurrencyER}" th:id="|edit_cer_${cer.curexchratepk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="curexchratepk" th:value="${cer.curexchratepk}">
+                       		<input type="hidden" name="orgncode" th:value="${cer.orgncode}">
+		                    <input type="hidden" name="scnos" th:value="${cer.scnos}">
+		                    <input type="hidden" name="scurr" th:value="${cer.scurr}">
+		                    <input type="hidden" name="tcurr" th:value="${cer.tcurr}">
+		                    <input type="hidden" name="tcurrv" th:value="${cer.tcurrv}">
+		                    <input type="hidden" name="valfdate" th:value="${cer.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${cer.valtdate}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_cer_${cer.curexchratepk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertCurrencyER}" th:id="|delete_cer_${cer.curexchratepk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="curexchratepk" th:value="${cer.curexchratepk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_cer_${cer.curexchratepk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+				</form>
+</body>
+</html>

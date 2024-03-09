@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MRC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>MRC</h1>
+            
+            <form action="#" th:action="@{/insertMrc}" th:object="${mrc}" method="post" class="form">
+            
+            <div class="form-group">
+                    <label for="itemcode">ITEM CODE</label>
+                    <input class="form-control" type="text" th:field="*{itemcode}" id="itemcode" placeholder="ITEM CODE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('itemcode')}" th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemtype">ITEM TYPE</label>
+                    <input class="form-control" type="text" th:field="*{itemtype}" id="itemtype" placeholder="ITEM TYPE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('itemtype')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="plant">PLANT</label>
+                    <input class="form-control" type="text" th:field="*{plant}" id="plant" placeholder="plant" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('plant')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control" type="text" th:field="*{sname}" id="sname" placeholder="String" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('sname')}" th:errors="*{String}"></div>
+                </div>
+                
+                
+               <div class="form-group">
+                    <label for="pricetype">MATERIAL TYPE</label>
+                    <input type="radio" name="pricetype" th:field="*{pricetype}" id="pricetype1" value="FG" label="MOVING">FG
+                    <input type="radio" name="pricetype" th:field="*{pricetype}" id="pricetype2" value="STD" label="STD"  >STD
+                    <input type="radio" name="pricetype" th:field="*{pricetype}" id="pricetype3" value="PLAN" label="PLAN" >PLAN
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('pricetype')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valfdate">FROM DATE</label>
+                    <input class="form-control"type="date" th:field="*{valfdate}"id="valfdate"placeholder="FROM DATE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valfdate')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="valtdate">TO DATE</label>
+                    <input class="form-control"type="date" th:field="*{valtdate}"id="valtdate"placeholder="TO DATE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('valtdate')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="buom">Base unit of Measure</label>
+                    <input class="form-control"type="text"th:field="*{buom}"id="buom"placeholder="Base unit of Measure" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('buom')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="buqty">Base Quantity</label>
+                    <input class="form-control"type="number"th:field="*{buqty}"id="buqty"placeholder="Base Quantity" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('buqty')}"th:errors="*{number}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input class="form-control"type="number"th:field="*{price}"id="price"placeholder="PRICE" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('price')}"th:errors="*{number}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valsub">VALSUB</label>
+                    <input class="form-control" type="text" th:field="*{valsub}" id="valsub" placeholder="VALSUB" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('valsub')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="batchnumbernumber">BATCH NUMBER</label>
+                    <input class="form-control"type="text"th:field="*{batchnumber}"id="batchnumber"placeholder="BATCH NUMBER"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('batchnumber')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>

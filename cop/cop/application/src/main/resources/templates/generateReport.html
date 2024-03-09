@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Report</title>
+</head>
+
+<div th:replace="fragments/header :: header" />
+<div class=row style="margin-top:75px"></div>
+<body style="background-color:  #caebf2;">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function orgChange() {
+    var org = $("#org").val();
+    $.get( "/plant?org=" + org, function( data ) {
+        $("#plant").empty();
+        var option = "<option default>Please Select...</option>";
+        $("#plant").append(option);
+        data.forEach(function(item, i) {
+            var option = "<option value = " + item + ">" + item +  "</option>";
+            $("#plant").append(option);
+        });
+    });
+    
+    $.get( "/year?org=" + org, function( data ) {
+        $("#year").empty();
+        data.forEach(function(item, i) {
+            var option = "<option value = " + item + ">" + item +  "</option>";
+            $("#year").append(option);
+        });
+    });
+};
+
+function yearChange() {
+	var org = $("#org").val();
+	var year = $("#year").val();
+    $.get( "/period?org=" + org+"&year=" + year, function( data ) {
+        $("#period").empty();
+        data.forEach(function(item, i) {
+        	//alert(item);
+        	var fydPeriod = JSON.parse(JSON.stringify(item));
+        	//var fromdate = fydPeriod.fromdate.split("-")[2]+"/"+fydPeriod.fromdate.split("-")[1]+"/"+fydPeriod.fromdate.split("-")[0];
+        	//var todate = fydPeriod.todate.split("-")[2]+"/"+fydPeriod.todate.split("-")[1]+"/"+fydPeriod.todate.split("-")[0];
+            //var option = "<option value = " + fydPeriod.period + ">" + fromdate+"-"+todate +  "</option>";
+            var option = "<option value = " + fydPeriod.period + ">" + fydPeriod.period +  "</option>";
+            //alert(option);
+            $("#period").append(option);
+        });
+    });
+};
+
+$(document).ready(function() {
+    $("#org").change(function() {
+    	//alert("hi");
+        orgChange();
+    });
+    $("#year").change(function() {
+    	//alert("hi");
+        yearChange();
+    });
+});
+</script>
+
+	<div align="center">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Generate Report</h2>
+						<form method="post" th:action="@{/generateReport}"
+							enctype="multipart/form-data">
+							<div class="form-group">
+								<table border=1, bordercollapse=collapse style= "background-color:#C6EEF6;">
+									<tr>
+										<td style="width: 198px;">Organization</td>
+										<td style="width: 199px; text-align: left;"><select
+											id="org" name="org" th:value=${{org}} >
+												<option default>Please select...</option>
+												<option th:each="org : ${orgs}" th:value="${org.orgncode}" th:selected="${selectedOrg==org.orgncode}"
+													th:utext="${org.sname}" </option>
+																								
+										</select></td>
+										
+									</tr>
+									<tr>
+										<td style="width: 198px;">Plant</td>
+										<td style="width: 199px; text-align: left;"><select
+											id="plant" name="plant" th:value=${{plant}}>
+												<option default>Please select...</option>
+												<option th:each="plant :${plants}" th:value="${plant.plant}" th:selected="${selectedPlant==plant.plant}"
+												th:utext="${plant.sname}" </option>
+												
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">YEAR</td>
+										<td style="width: 199px;"><select id="year" name="year">
+										<option default>Please select...</option>
+										 <option th:each="year :${years}" th:value="${year}" th:selected="${selectedYear==year}"
+												th:utext="${year}" </option>
+												
+										
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">Period</td>
+										<td style="width: 199px;"><select id="period" name="period">
+										<option default>Please select...</option>
+										<option th:each="period :${periods}" th:value="${period.period}" th:selected="${selectedPeriod==period.period}"
+												th:utext="${period.period}" </option>
+										</select></td>
+									</tr>
+									<tr>
+										<td style="width: 198px;">MATERIAL</td>
+										<td style="width: 199px;"><select id="mat" name="mat"
+											th:value=${{mat}}>
+												<option default>Please select...</option>
+												<option th:each="mat : ${mats}" th:value="${mat.matlcode}"th:selected="${selectedMaterial==mat.matlcode}"
+													th:utext="${mat.sname}" />
+										</select></td>
+									</tr>
+
+									<tr>
+										<td style="width: 198px;">STOCK TYPE</td>
+										<td style="width: 199px;"><label for="stocktype"></label><select
+											id="stocktype" name="stocktype">
+
+												<option default value="Please Select...">Please select...</option>
+												<option value="O">O</option>
+												<option value="OV">OV</option>
+												<option value="S">S</option>
+												<option value="SV">SV</option>
+										</select></td>
+									</tr>
+
+									<tr>
+										<td style="width: 198px;">SOASSIGNMENT</td>
+										<td style="width: 199px;"><input type="text" id="soa"
+											name="soa"><br></td>
+										</select>
+										</td>
+									</tr>
+									<tr align="center">
+										<td colspan="2"><button type="submit"  name="action" value="consolidated">GENERATE CONSOLIDATED
+												REPORT</button></td>
+									</tr>
+									
+									<tr align="center">
+										<td colspan="2"><button type="submit"
+												class="btn btn-primary" name="action" value="detailed" onclick='this.form.action="/generateDetailedReport";'>GENERATE DETAILED
+												REPORT</button></td>
+									</tr>
+									<tr align="center">
+										<td colspan="2"><button type="submit"
+												class="btn btn-primary" name="action" value="recon" onclick='this.form.action="/generateReconReport";'>GENERATE RECON
+												REPORT</button></td>
+									</tr>
+								</table>
+							</div>
+							<div>
+								<p>
+								<p>
+								<p>
+								<div th:if="${results!=null && !results.empty}">
+									<table style="background-color: WHITE;">
+										<thead>
+											<tr>
+												<th>PLANT</th>
+												<th>MATERIAL</th>
+												<th>STOCK TYPE</th>
+												<th>SALE ORDER</th>
+												<th>VALSUB</th>
+												<th>BATCHNUMBER</th>
+												<th>BUOM</th>
+												<th>PROCUREMENT RECEIPTS</th>
+												<th>JOB RECEIPTS</th>
+												<th>PROD RECEIPTS</th>
+												<th>STO RECEIPTS</th>
+												<th>STO IN TRANSIT</th>
+												<th>TRANSFER RECEIPTS</th>
+												<th>PROCUREMENT RETURN</th>
+												<th>JOB CONSUMPTION</th>
+												<th>PROD CONSUMPTION</th>
+												<th>STO DELIVERY</th>
+												<th>TRANSFER DELIVERY</th>
+												<th>SALE DELIVERY</th>
+												<th>CTR CONSUMPTION</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr th:each="result : ${results}">
+												<td th:text=${result[0]}>-</td>
+												<td th:text=${result[1]}>-</td>
+												<td th:text=${result[2]}>-</td>
+												<td th:text=${result[3]}>-</td>
+												<td th:text=${result[4]}>-</td>
+												<td th:text=${result[5]}>-</td>
+												<td th:text=${result[6]}>-</td>
+												<td th:text=${result[7]}>-</td>
+												<td th:text=${result[8]}>-</td>
+												<td th:text=${result[9]}>-</td>
+												<td th:text=${result[10]}>-</td>
+												<td th:text=${result[11]}>-</td>
+												<td th:text=${result[12]}>-</td>
+												<td th:text=${result[13]}>-</td>
+												<td th:text=${result[14]}>-</td>
+												<td th:text=${result[15]}>-</td>
+												<td th:text=${result[16]}>-</td>
+												<td th:text=${result[17]}>-</td>
+												<td th:text=${result[18]}>-</td>
+												<td th:text=${result[19]}>-</td>
+
+
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								
+								<div th:if="${dResults!=null && !dResults.empty}">
+									<table border=1, bordercollapse=collapse style="background-color: WHITE;">
+										<thead>
+											<tr>
+											<th>MM DOCNUM</th>
+											<th>MM DOC ITNUM</th>
+											<th>DATE</th>
+											<th>DOCUOM</th>
+											<th>DOCUOM QTY</th>
+											<th>OBJTYPE</th>
+											<th>OBJNUM</th>
+											<th>OBJITNUM</th>
+											<th>PLANT</th>
+												<th>MATERIAL</th>
+												<th>STOCK TYPE</th>
+												<th>SALE ORDER</th>
+												<th>VALSUB</th>
+												<th>BATCHNUMBER</th>
+												<th>BUOM</th>
+												<th>OPENING STOCK</th>
+												<th>PROCUREMENT RECEIPTS</th>
+												<th>JOB RECEIPTS</th>
+												<th>PROD RECEIPTS</th>
+												<th>STO RECEIPTS</th>
+												<th>STO IN TRANSIT</th>
+												<th>TRANSFER RECEIPTS</th>
+												<th>PROCUREMENT RETURN</th>
+												<th>JOB CONSUMPTION</th>
+												<th>PROD CONSUMPTION</th>
+												<th>STO DELIVERY</th>
+												<th>TRANSFER DELIVERY</th>
+												<th>SALE DELIVERY</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr th:each="dResult : ${dResults}">
+												<td th:text=${dResult[0]}>-</td>
+												<td th:text=${dResult[1]}>-</td>
+												<td th:text=${dResult[2]}>-</td>
+												<td th:text=${dResult[3]}>-</td>
+												<td th:text=${dResult[4]}>-</td>
+												<td th:text=${dResult[5]}>-</td>
+												<td th:text=${dResult[6]}>-</td>
+												<td th:text=${dResult[7]}>-</td>
+												<td th:text=${dResult[8]}>-</td>
+												<td th:text=${dResult[9]}>-</td>
+												<td th:text=${dResult[10]}>-</td>
+												<td th:text=${dResult[11]}>-</td>
+												<td th:text=${dResult[12]}>-</td>
+												<td th:text=${dResult[13]}>-</td>
+												<td th:text=${dResult[14]}>-</td>
+												<td th:text=${dResult[15]}>-</td>
+												<td th:text=${dResult[16]}>-</td>
+												<td th:text=${dResult[17]}>-</td>
+												<td th:text=${dResult[18]}>-</td>
+												<td th:text=${dResult[19]}>-</td>
+												<td th:text=${dResult[20]}>-</td>
+												<td th:text=${dResult[21]}>-</td>
+												<td th:text=${dResult[22]}>-</td>
+												<td th:text=${dResult[23]}>-</td>
+												<td th:text=${dResult[24]}>-</td>
+												<td th:text=${dResult[25]}>-</td>
+												<td th:text=${dResult[26]}>-</td>
+												<td th:text=${dResult[27]}>-</td>
+												
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div 
+									th:if="${(reconTotalAmtMap!=null && !reconTotalAmtMap.empty)
+									 || (liTotalAmtMap!=null && !liTotalAmtMap.empty) 
+									 || (trstTotalAmtMap!=null && !trstTotalAmtMap.empty)
+									 || (tostTotalAmtMap!=null && !tostTotalAmtMap.empty)
+									 ||(rawTotalCost!=null)
+									 ||(sfgTotalCost!=null) 
+									 ||(fgTotalCost!=null)
+									 ||(consTotalCost!=null)}">
+									
+									<div th:replace="reconReport :: reconReport"> </div>
+									
+								
+								<!--  <p>Download<a href="downloadExcelFile">Download File</a> </p>-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+
+<div class=row style="margin-top:225px"></div>
+<div th:replace="fragments/footer :: footer"/>
+</html>

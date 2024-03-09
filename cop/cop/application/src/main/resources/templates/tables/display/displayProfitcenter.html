@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROFIT CENTER</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchProfitcenter}" method="get">
+<button  style="float: left;"><a th:href="@{/insertProfitcenter}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Profitcenter" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  
+  <br><br>
+		<div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Profitcenter}" enctype="multipart/form-data">
+		<input type="file" name="file">
+			<button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+		</form><br><br>
+		
+		<form method="post" th:action="@{/findProfitcenter}">
+			<h1>PROFIT CENTER</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">profitcenterpk</th>
+						<th scope="col">profitcr</th>
+						<th scope="col">sname</th>
+						<th scope="col">lname</th>
+						<th scope="col">ostat</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="pc: ${pcs}">
+
+						<td scope="row" th:text=${pc.profitcenterpk}>-</td>
+						<td scope="row" th:text=${pc.profitcr}>-</td>
+						<td scope="row" th:text=${pc.sname}>-</td>
+						<td scope="row" th:text=${pc.lname}>-</td>
+						<td scope="row" th:text=${pc.ostat}>-</td>
+						<td scope="row" th:text=${pc.valfdate}>-</td>
+						<td scope="row" th:text=${pc.valtdate}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertProfitcenter}" th:id="|edit_pc_${pc.profitcenterpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="profitcenterpk" th:value="${pc.profitcenterpk}">
+                       		<input type="hidden" name="profitcr" th:value="${pc.profitcr}">
+		                    <input type="hidden" name="sname" th:value="${pc.sname}">
+		                    <input type="hidden" name="lanme" th:value="${pc.lname}">
+		                    <input type="hidden" name="ostat" th:value="${pc.ostat}">
+		                    <input type="hidden" name="valfdate" th:value="${pc.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${pc.valtdate}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_pc_${pc.profitcenterpk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertProfitcenter}" th:id="|delete_pc_${pc.profitcenterpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="profitcenterpk" th:value="${pc.profitcenterpk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_pc_${pc.profitcenterpk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

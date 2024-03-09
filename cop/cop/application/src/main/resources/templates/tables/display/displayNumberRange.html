@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NUMBER RANGE</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+		
+<p>
+<p>
+	<form th:action="@{/searchNumberRange}" method="get">
+<button  style="float: left;"><a th:href="@{/insertNumberRange}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Num Object" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findNumberRange}">
+			<h1>NUMBER RANGE</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">rangeid</th>
+						<th scope="col">numobject</th>
+						<th scope="col">numtype</th>
+						<th scope="col">rangefrom</th>
+						<th scope="col">rangeto</th>
+						<th scope="col">currentnumber</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="nr : ${nrs}">
+
+						<td scope="row" th:text=${nr.rangeid}>-</td>
+						<td scope="row" th:text=${nr.numobject}>-</td>
+						<td scope="row" th:text=${nr.numtype}>-</td>
+						<td scope="row" th:text=${nr.rangefrom}>-</td>
+						<td scope="row" th:text=${nr.rangeto}>-</td>
+						<td scope="row" th:text=${nr.currentnumber}>-</td>
+						<td>
+						<form></form>
+                        <form th:action="@{/insertNumberRange}" th:id="|edit_nr_${nr.rangeid}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="rangeid" th:value="${nr.rangeid}">
+                       		<input type="hidden" name="numobject" th:value="${nr.numobject}">
+		                    <input type="hidden" name="numtype" th:value="${nr.numtype}">
+		                    <input type="hidden" name="rangefrom" th:value="${nr.rangefrom}">
+		                    <input type="hidden" name="rangeto" th:value="${nr.rangeto}">
+		                    <input type="hidden" name="currentnumber" th:value="${nr.currentnumber}">
+		                    <a href="#" th:onclick="|document.getElementById('edit_nr_${nr.rangeid}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    	
+              			</form>
+              			</td>
+                    	<td>
+                        	<form th:action="@{/insertNumberRange}" th:id="|delete_nr_${nr.rangeid}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="batch" th:value="${nr.rangeid}">
+		                     <a href="#" th:onclick="|document.getElementById('edit_nr_${nr.rangeid}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                    		</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

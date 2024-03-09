@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VENDOR</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchVendor}" method="get">
+<button  style="float: left;"><a th:href="@{/insertVendor}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Short Name" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findVendor}">
+			<h1>VENDOR</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">address1</th>
+						<th scope="col">address2</th>
+						<th scope="col">address3</th>
+						<th scope="col">address4</th>
+						<th scope="col">govrn1</th>
+						<th scope="col">lname</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">ostat</th>
+						<th scope="col">partnfunc</th>
+						<th scope="col">plant</th>
+						<th scope="col">sname</th>
+						<th scope="col">vendor</th>
+						<th scope="col">vendortyp</th>
+						<th scope="col">vendortypd</th>
+						<th scope="col">vengrp</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="vendor: ${vendors}">
+						<td scope="row" th:text=${vendor.address1}>-</td>
+						<td scope="row" th:text=${vendor.address2}>-</td>
+						<td scope="row" th:text=${vendor.address3}>-</td>
+						<td scope="row" th:text=${vendor.address4}>-</td>
+						<td scope="row" th:text=${vendor.govrn1}>-</td>
+						<td scope="row" th:text=${vendor.lname}>-</td>
+						<td scope="row" th:text=${vendor.orgncode}>-</td>
+						<td scope="row" th:text=${vendor.ostat}>-</td>
+						<td scope="row" th:text=${vendor.partnfunc}>-</td>
+						<td scope="row" th:text=${vendor.plant}>-</td>
+						<td scope="row" th:text=${vendor.sname}>-</td>
+						<td scope="row" th:text=${vendor.vendor}>-</td>
+						<td scope="row" th:text=${vendor.vendortyp}>-</td>
+						<td scope="row" th:text=${vendor.vendortypd}>-</td>
+						<td scope="row" th:text=${vendor.vengrp}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertVendor}" th:id="|edit_vendor_${vendor.vendor}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="vendor" th:value="${vendor.vendor}">
+                       		<input type="hidden" name="address1" th:value="${vendor.address1}">
+		                    <input type="hidden" name="address2" th:value="${vendor.address2}">
+		                    <input type="hidden" name="address3" th:value="${vendor.address3}">
+		                    <input type="hidden" name="address4" th:value="${vendor.address4}">
+		                    <input type="hidden" name="govrn1" th:value="${vendor.govrn1}">
+		                    <input type="hidden" name="lname" th:value="${vendor.lname}">
+		                    <input type="hidden" name="orgncode" th:value="${vendor.orgncode}">
+		                    <input type="hidden" name="ostat" th:value="${vendor.ostat}">
+		                    <input type="hidden" name="partnfunc" th:value="${vendor.partnfunc}">
+		                    <input type="hidden" name="plant" th:value="${vendor.plant}">
+		                    <input type="hidden" name="sname" th:value="${vendor.sname}">
+		                    <input type="hidden" name="vendortyp" th:value="${vendor.vendortyp}">
+		                    <input type="hidden" name="vendortypd" th:value="${vendor.vendortypd}">
+		                    <input type="hidden" name="vengrp" th:value="${vendor.vengrp}">
+		                    <a href="#"  th:data-elementid="|edit_vendor_${vendor.vendor}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|"class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertVendor}" th:id="|delete_ven_${vendor.vendor}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="vendor" th:value="${vendor.vendor}">
+		                    <a href="#"  th:data-elementid="|delete_vendor_${vendor.vendor}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+	</form>
+</body>
+</html>

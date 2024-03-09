@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>BOM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>BOM</h1>
+            
+        
+            <form action="#"th:action="@{/deleteBom}"th:object="${boms}"method="post"class="form">
+            
+            <div class="form-group">
+            
+            <div th:switch="${boms}">
+    <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            <h2>boms</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>BOMCODE</th>
+                        <th>PLANT</th>
+                        <th>MATERAIL</th>
+                        <th>UOM</th>
+                        <th>BASE QUANTITY</th>
+                        <TH>PRDUOM</TH>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bom : ${boms}">
+                    <td th:text="${bom.bomcode}"></td>
+                    <td th:text="${bom.plant}"></td>
+                    <td th:text="${bom.bhmatl}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${bom.bomcode})}">Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${bom.bomcode})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+   
+                 
+                
+                <input type="submit" class="btn btn-success"value="Add">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

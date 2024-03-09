@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Currency</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>MATERIAL MASTER</h1>
+            
+            <form action="#" th:action="@{/insertMaterial}" th:object="${mat}" method="post" class="form">
+            
+            <div class="form-group">
+                    <label for="matlcode">MATERIAL CODE</label>
+                    <input class="form-control" type="text" th:field="*{matlcode}" id="matlcode" placeholder="MATERIAL CODE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('matlcode')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control" type="text" th:field="*{sname}" id="sname" placeholder="String" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('sname')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lname">LONG NAME</label>
+                    <input class="form-control" type="text" th:field="*{lname}" id="lname" placeholder="integer" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('lname')}" th:errors="*{integer}"></div>
+                </div>
+                
+               <div class="form-group">
+                    <label for="mattyp">MATERIAL TYPE</label>
+                    <input type="radio" name="mattyp" th:field="*{mattyp}" id="mattyp1" value="FG" label="FG">FG
+                    <input type="radio" name="mattyp" th:field="*{mattyp}" id="mattyp2" value="SFG" label="SFG"  >SFG
+                    <input type="radio" name="mattyp" th:field="*{mattyp}" id="mattyp3" value="RAW" label="RAW" >RAW
+                    <input type="radio" name="mattyp" th:field="*{mattyp}" id="mattyp4" value="CONS" label="CONS" >CONS
+                    
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('mattyp')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="typed">DESCRIPTION</label><br>
+                    <input type="radio" name="typed" th:field="*{typed}" id="typed1" value="FINISHED GOODS" >FINISHED GOODS<br>
+                    <input type="radio" name="typed" th:field="*{typed}" id="typed2" value="SEMIFINISHED"  >SEMIFINISHED<br>
+                    <input type="radio" name="typed" th:field="*{typed}" id="typed3" value="RAW MATERIAL"  >RAW MATERIAL<br>
+                    <input type="radio" name="typed" th:field="*{typed}" id="typed4" value="CONSUMABLE"  >CONSUMABLE<br>
+                     <div class="alert alert-warning" th:if="${#fields.hasErrors('typed')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="plant">PLANT</label>
+                    <input class="form-control" type="text" th:field="*{plant}" id="plant" placeholder="plant" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('plant')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="prdind">PRODUCTION ALLOWED INDICATOR</label><br>
+                    <input  type="radio" th:field="*{prdind}" id="prdind" name="prdind1" value="YES">
+					<label for="prdind1"> YES</label><br>
+					<input type="radio" th:field="*{prdind}" id="prdind" name="prdind2" value="NO">
+					<label for="prdind2"> NO</label><br>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('prdind')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="bomal">BOM ALLOWED</label>
+                    <input  type="radio" th:field="*{bomal}" id="bomal" name="bomal1" value="YES">
+					<label for="bomal1"> YES</label><br>
+					<input type="radio" th:field="*{bomal}" id="bomal" name="bomal2" value="NO">
+					<label for="bomal2"> NO</label><br><div class="alert alert-warning" th:if="${#fields.hasErrors('bomal')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="prcsind">PROCESS CARD ALLOWED</label>
+                    <input  type="radio" th:field="*{prcsind}" id="prcsind" name="prcsind1" value="YES">
+					<label for="prcsind1"> YES</label><br>
+					<input type="radio" th:field="*{prcsind}" id="prcsind" name="prcsind2" value="NO">
+					<label for="prcsind2"> NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('prcsind')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="oboind">OUTRIGHT BOUGHT OUT</label><br>
+                    <input  type="radio" th:field="*{oboind}" id="oboind" name="oboind1" value="YES">
+					<label for="oboind1"> YES</label><br>
+					<input type="radio" th:field="*{oboind}" id="oboind" name="oboind2" value="NO">
+					<label for="oboind2"> NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('oboind')}" th:errors="*{integer}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="scallow">SUBCON ALLOWED</label>
+                    <input  type="radio" th:field="*{scallow}" id="scallow" name="scallow1" value="YES">
+					<label for="scallow1"> YES</label><br>
+					<input type="radio" th:field="*{scallow}" id="scallow" name="scallow2" value="NO">
+					<label for="scallow2"> NO</label><br>
+                    
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('scallow')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="utpcost">APPLY TRANSFER PLANT COST</label><br>
+                    <input  type="radio" th:field="*{utpcost}" id="utpcost" name="utpcost1" value="YES">
+					<label for="utpcost1"> YES</label><br>
+					<input type="radio" th:field="*{utpcost}" id="utpcost" name="utpcost2" value="NO">
+					<label for="utpcost2"> NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('utpcost')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trplant">TRANSFER PLANT</label><br>
+                   <input  type="radio" th:field="*{trplant}" id="trplant" name="trplant1" value="YES">
+					<label for="trplant1"> YES</label><br>
+					<input type="radio" th:field="*{trplant}" id="trplant" name="trplant2" value="NO">
+					<label for="trplant2"> NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('trplant')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ignocost">IGNORE COSTING</label><br>
+                    <input  type="radio" th:field="*{ignocost}" id="ignocost" name="ignocost1" value="YES">
+					<label for="ignocost1"> YES</label><br>
+					<input type="radio" th:field="*{ignocost}" id="ignocost" name="ignocost2" value="NO">
+					<label for="ignocost2"> NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('ignocost')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coprind">COPRODUCT INDICATOR</label>
+                    <input  type="radio" th:field="*{coprind}" id="coprind" name="coprind1" value="YES">
+					<label for="coprind1"> YES</label><br>
+					<input type="radio" th:field="*{coprind}" id="coprind" name="coprind2" value="NO">
+					<label for="coprind2"> NO</label><br><div class="alert alert-warning" th:if="${#fields.hasErrors('byproduct')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="byproduct">BY PRODUCT</label>
+                    <input  type="radio" th:field="*{byproduct}" id="byproduct" name="byproduct1" value="YES">
+					<label for="byproduct1"> YES</label><br>
+					<input type="radio" th:field="*{byproduct}" id="byproduct" name="byproduct2" value="NO">
+					<label for="byproduct2"> NO</label>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('byproduct')}" th:errors="*{integer}"></div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="ostat">ORGANISATION STATUS</label>
+                    <input  type="radio"th:field="*{ostat}"id="ostat"name="ostat1"value="TRIVIAL">
+					<label for="ostat1">TRIVIAL</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat2"value="ACTIVE">
+					<label for="ostat2">ACTIVE</label><br>
+					<input type="radio"th:field="*{ostat}"id="ostat"name="ostat3"value="DORMANT">
+					<label for="ostat3">DORMANT</label>
+					 <div class="alert alert-warning" th:if="${#fields.hasErrors('ostat')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="buom">Basic unit of  Material</label>
+                    <input class="form-control" type="text" th:field="*{buom}" id="buom" placeholder="Basic unit of  Material" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('buom')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="profitcr">PROFIT CENTER CODE</label>
+                    <input class="form-control" type="text" th:field="*{profitcr}" id="profitcr" placeholder="PROFIT CENTER CODE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('profitcr')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coslot">COSTING LOT</label>
+                    <input class="form-control" type="number" th:field="*{coslot}" id="coslot" placeholder="COSTING LOT" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('coslot')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valgrp">VALUE GROUP</label>
+                    <input class="form-control" type="number" th:field="*{valgrp}" id="valgrp" placeholder="VALUE GROUP" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('valgrp')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valsub">VALSUB</label>
+                    <input class="form-control" type="text" th:field="*{valsub}" id="valsub" placeholder="VALSUB" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('valsub')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="batch">ARE BATCHES ALLOWED</label>
+                    <input  type="radio" th:field="*{batch}" id="batch" name="batch1" value="YES">
+					<label for="batch1">YES</label><br>
+					<input type="radio" th:field="*{batch}" id="batch" name="batch2" value="NO">
+					<label for="batch2">NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('batch')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="batchcosting">IS BATCH COSTING ALLOWED</label><br>
+                    <input  type="radio" th:field="*{batchcosting}" id="batchcosting" name="batchcosting1" value="YES">
+					<label for="batchcosting1">YES</label><br>
+					<input type="radio" th:field="*{batchcosting}" id="batchcosting" name="batchcosting2" value="NO">
+					<label for="batchcosting2">NO</label><br>
+					<div class="alert alert-warning" th:if="${#fields.hasErrors('batchcosting')}" th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>

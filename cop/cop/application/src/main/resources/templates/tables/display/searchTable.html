@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form method="post" th:action="@{/displayTables}" 	enctype="multipart/form-data">
+
+
+		<div class="form-group">
+			<label for="tablename">TABLE NAME</label> <select class="form-control"
+				id="tablename" name="tablename" th:field="*{tablename}">
+				<option value="boms">BOM</option>
+				<option value="ccbs">CCB</option>
+				<option value="fyds">FYD</option>
+
+				<div class="alert alert-warning"
+					th:if="${#fields.hasErrors('tablename')}" th:errors="*{integer}"></div>
+		</div>
+
+		<input type="submit" class="btn btn-success" value="SHOW">
+		
+	</form>
+	</div>
+	</div>
+
+</body>
+</html>

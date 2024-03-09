@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>FYD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+
+<p>
+<p>
+	<form th:action="@{/searchBom}" method="get">
+<button  style="float: left;"><a th:href="@{/insertBom}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by imatl" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  <br><br>
+		<div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Bom}" enctype="multipart/form-data">
+		<input type="file" name="file">
+			<button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+		</form><br><br>
+	<form  method="post" th:action="@{/findBom}" >
+	<h1>Bill Of Material</h1>
+	
+		
+			<table class="table table-success table-striped">
+				<thead>
+				<tr>
+					
+						<th scope="col">bompk</th>
+						<th scope="col">buqty</th>
+						<th scope="col">prduomqty</th>
+						<th scope="col">cnvbuomqty</th>
+						<th scope="col">version</th>
+						<th scope="col">cnvpuomqty</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+						<th scope="col">islnum</th>
+						<th scope="col">ibuqty</th>
+						<th scope="col">hmratio</th>
+						<th scope="col">copratio</th>
+						<th scope="col">ostat</th>
+						<th scope="col">bomcode</th>
+						<th scope="col">plant</th>
+						<th scope="col">bhmatl</th>
+						<th scope="col">buom</th>
+						<th scope="col">apptype</th>
+						<th scope="col">prduom</th>
+						<th scope="col">imatl</th>
+						<th scope="col">ibuom</th>
+						<th scope="col">ustyp</th>
+						<th scope="col">coprind</th>		
+						<th scope="col">ustypd</th>		
+						
+
+											</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="bom : ${boms}">
+
+						<td scope="row" th:text=${bom.bompk}>-</td>
+						<td scope="row" th:text=${bom.buqty}>-</td>
+						<td scope="row" th:text=${bom.prduomqty}>-</td>
+						<td scope="row" th:text=${bom.cnvbuomqty}>-</td>
+						<td scope="row" th:text=${bom.version}>-</td>
+						<td scope="row" th:text=${bom.cnvpuomqty}>-</td>
+						<td scope="row" th:text=${bom.valfdate}>-</td>
+						<td scope="row" th:text=${bom.valtdate}>-</td>
+						<td scope="row" th:text=${bom.islnum}>-</td>
+						<td scope="row" th:text=${bom.ibuqty}>-</td>
+						<td scope="row" th:text=${bom.hmratio}>-</td>
+						<td scope="row" th:text=${bom.copratio}>-</td>
+						<td scope="row" th:text=${bom.ostat}>-</td>
+						<td scope="row" th:text=${bom.bomcode}>-</td>
+						<td scope="row" th:text=${bom.plant}>-</td>
+						<td scope="row" th:text=${bom.bhmatl}>-</td>
+						<td scope="row" th:text=${bom.buom}>-</td>
+						<td scope="row" th:text=${bom.apptype}>-</td>
+						<td scope="row" th:text=${bom.prduom}>-</td>
+						<td scope="row" th:text=${bom.imatl}>-</td>
+						<td scope="row" th:text=${bom.ibuom}>-</td>
+						<td scope="row" th:text=${bom.ustyp}>-</td>
+						<td scope="row" th:text=${bom.coprind}>-</td>
+						<td scope="row" th:text=${bom.ustypd}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertBom}" th:id="|edit_bom_${bom.bompk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="bompk" th:value="${bom.bompk}">
+                       		<input type="hidden" name="buqty" th:value="${bom.buqty}">
+		                    <input type="hidden" name="prduomqty" th:value="${bom.prduomqty}">
+		                    <input type="hidden" name="cnvbuomqty" th:value="${bom.cnvbuomqty}">
+		                    <input type="hidden" name="version" th:value="${bom.version}">
+		                    <input type="hidden" name="cnvpuomqty" th:value="${bom.cnvpuomqty}">
+		                    <input type="hidden" name="valfdate" th:value="${bom.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${bom.valtdate}">
+		                    <input type="hidden" name="islnum" th:value="${bom.islnum}">
+		                    <input type="hidden" name="ibuqty" th:value="${bom.ibuqty}">
+		                    <input type="hidden" name="hmratio" th:value="${bom.hmratio}">
+		                    <input type="hidden" name="copratio" th:value="${bom.copratio}">
+		                    <input type="hidden" name="ostat" th:value="${bom.ostat}">
+		                    <input type="hidden" name="bomcode" th:value="${bom.bomcode}">
+		                    <input type="hidden" name="plant" th:value="${bom.plant}">
+		                    <input type="hidden" name="bhmatl" th:value="${bom.bhmatl}">
+		                    <input type="hidden" name="buom" th:value="${bom.buom}">
+		                    <input type="hidden" name="apptype" th:value="${bom.apptype}">
+		                     <input type="hidden" name="prduom" th:value="${bom.prduom}">
+		                      <input type="hidden" name="imatl" th:value="${bom.imatl}">
+		                       <input type="hidden" name="ibuom" th:value="${bom.ibuom}">
+		                        <input type="hidden" name="ustyp" th:value="${bom.ustyp}">
+		                        <input type="hidden" name="ustypd" th:value="${bom.ustypd}">
+		                        <input type="hidden" name="coprind" th:value="${bom.coprind}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_bom_${bom.bompk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertBom}" th:id="|delete_bom_${bom.bompk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="bompk" th:value="${bom.bompk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_bom_${bom.bompk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+
+					</tr>	
+				</tbody>
+
+				
+			</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>
+</html>

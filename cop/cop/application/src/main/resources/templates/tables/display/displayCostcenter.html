@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COST CENTER</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchCc}" method="get">
+<button  style="float: left;"><a th:href="@{/insertCc}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Costcenter" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  
+  <br><br>
+		<div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Costcenter}" enctype="multipart/form-data">
+		<input type="file" name="file">
+			<button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+	</form><br><br>
+		
+		<form method="post" th:action="@{/findCc}">
+			<h1>COST CENTER</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">cctr</th>
+						<th scope="col">function</th>
+						<th scope="col">lname</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">ostat</th>
+						<th scope="col">plant</th>
+						<th scope="col">profitcr</th>
+						<th scope="col">sname</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+					</tr>
+				</thead>
+       				<tbody>
+
+					<tr th:each="cc : ${ccs}">
+
+						<td scope="row" th:text=${cc.cctr}>-</td>
+						<td scope="row" th:text=${cc.function}>-</td>
+						<td scope="row" th:text=${cc.lname}>-</td>
+						<td scope="row" th:text=${cc.orgncode}>-</td>
+						<td scope="row" th:text=${cc.ostat}>-</td>
+						<td scope="row" th:text=${cc.plant}>-</td>
+						<td scope="row" th:text=${cc.profitcr}>-</td>
+						<td scope="row" th:text=${cc.sname}>-</td>
+						<td scope="row" th:text=${cc.valfdate}>-</td>
+						<td scope="row" th:text=${cc.valtdate}>-</td>
+						<td>
+						<form></form>
+                        <form th:action="@{/insertCc}" th:id="|edit_cc_${cc.cctr}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="cctr" th:value="${cc.cctr}">
+                       		<input type="hidden" name="function" th:value="${cc.function}">
+		                    <input type="hidden" name="lname" th:value="${cc.lname}">
+		                    <input type="hidden" name="orgncode" th:value="${cc.orgncode}">
+		                    <input type="hidden" name="ostat" th:value="${cc.ostat}">
+		                    <input type="hidden" name="plant" th:value="${cc.plant}">
+		                    <input type="hidden" name="profitcr" th:value="${cc.profitcr}">
+		                    <input type="hidden" name="sname" th:value="${cc.sname}">
+		                    <input type="hidden" name="valfdate" th:value="${cc.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${cc.valtdate}">
+		                    <a href="#" th:data-elementid="|edit_cc_${cc.cctr}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    	
+              			</form>
+              			</td>
+                    	<td>
+                        	<form th:action="@{/insertCc}" th:id="|delete_cc_${cc.cctr}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="batch" th:value="${cc.cctr}">
+		                     <a href="#" th:data-elementid="|delete_cc_${cc.cctr}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                    		</form>
+                        </td>
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	layout:decorator="layout/layout">
+<html>
+<head>
+title>Activity Price </title>
+</head>
+<body>
+<div layout:fragment="content">
+	<form  method="post" th:action="@{/saveActivityPrice}" >
+	<label>Activity priced generated is as displayed below</label>
+	<h3><label>Org: </label><label th:text="${org}"></label><input type="hidden" th:value="${org}" name="org" id="org"/><br/>
+		<label>Plant: </label><label th:text="${plant}"></label><input type="hidden" th:value="${plant}" name="plant" id="plant"/><br/>
+		<label>Year: </label><label th:text="${year}"></label><input type="hidden" th:value="${year}" name="year" id="year"/><br/>
+		<label>Period: </label><label th:text="${period}"></label><input type="hidden" th:value="${period}" name="period" id="period"/><br/>
+	</h3>
+		<div th:if="${oprnprice!=null && !oprnprice.empty}">
+			<table border=1 style="background-color: WHITE;">
+				<thead>
+				<tr>
+					<tr>
+						
+						<th>ORGANISATION CODE</th>
+						<th>YEAR</th>
+						<th>PERIOD FROM </th>
+						<th>PERIOD TO</th>
+						<th>CURRO</th>
+						<th>COST CENTER</th>
+						<th>OPRN</th>
+						<th>DATA TYPE</th>
+						<th>CAPQTY</th>
+						<th>OPUOM</th>
+						<th>OPQTY</th>
+						<th>PRICE BASE</th>
+						<th>FIXED PRICE</th>
+						<th>VARPRICE</th>
+						<th>TOTPRICE</th>
+						<th>PRICEUOM</th>
+						<th>COSTACC</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="oprn : ${oprnprice}">
+
+						<td th:text=${oprn.orgncode}>-</td>
+						<td th:text=${oprn.year}>-</td>
+						<td th:text=${oprn.periodf}>-</td>
+						<td th:text=${oprn.periodto}>-</td>
+						<td th:text=${oprn.curro}>-</td>
+						<td th:text=${oprn.cctr}>-</td>
+						<td th:text=${oprn.oprn}>-</td>
+						<td th:text=${oprn.datatyp}>-</td>
+						<td th:text=${oprn.capqty}>-</td>
+						<td th:text=${oprn.opuom}>-</td>
+						<td th:text=${oprn.opqty}>-</td>
+						<td th:text=${oprn.pricebase}>-</td>
+						<td th:text=${oprn.fixpr}>-</td>
+						<td th:text=${oprn.varprice}>-</td>
+						<td th:text=${oprn.totprice}>-</td>
+						<td th:text=${oprn.priceuom}>-</td>
+						<td th:text=${oprn.costacc}>-</td>
+				</tbody>
+
+				</tr>
+			</table>
+</body>
+</html>

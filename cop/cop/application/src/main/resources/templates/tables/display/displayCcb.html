@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCB</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+		<p>
+		<p>
+			<button>
+				<a th:href="@{/insertCcb}">ADD Ccb</a>
+			</button>
+			<br>
+		<form th:action="@{/searchCcb}" method="get">
+			<input type="text" name="keyword" th:value="${keyword}"
+				placeholder="Find by Cagrp or Opgrp" size="50" align:right>
+			<button type="submit" class="btn btn-info">Search</button>
+			<button type="reset" class="btn btn-info">Reset</button>
+		</form>
+		<form method="post" th:action="@{/findCcb}">
+			<h1>CCB</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+
+						<th scope="col">ccbcode</th>
+						<th scope="col">ccbn</th>
+						<th scope="col">cagrp</th>
+						<th scope="col">cagrd</th>
+						<th scope="col">opgrp</th>
+						<th scope="col">ccbgrm</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="ccb : ${ccbs}">
+
+						<td scope="row" th:text=${ccb.ccbcode}>-</td>
+						<td scope="row" th:text=${ccb.ccbn}>-</td>
+						<td scope="row" th:text=${ccb.cagrp}>-</td>
+						<td scope="row" th:text=${ccb.cagrd}>-</td>
+						<td scope="row" th:text=${ccb.opgrp}>-</td>
+						<td scope="row" th:text=${ccb.ccbgrm}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertCcb}" th:id="|edit_ccb_${ccb.ccbn}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="ccbn" th:value="${ccb.ccbn}">
+                       		<input type="hidden" name="ccbcode" th:value="${ccb.ccbcode}">
+		                    <input type="hidden" name="cagrp" th:value="${ccb.cagrp}">
+		                    <input type="hidden" name="cagrd" th:value="${ccb.cagrd}">
+		                    <input type="hidden" name="opgrp" th:value="${ccb.opgrp}">
+		                    <input type="hidden" name="ccbgrm" th:value="${ccb.ccbgrm}">
+		                   
+		                    <a href="#"  th:onclick="|document.getElementById('edit_ccb_${ccb.ccbn}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertCcb}" th:id="|delete_ccb_${ccb.ccbn}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="ccbn" th:value="${ccb.ccbn}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_ccb_${ccb.ccbn}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

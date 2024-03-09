@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>PCB Breakup</title>
+</head>
+<body>
+
+<h2>Quantity type report</h2>
+<h3><label>Org: </label><label th:text="${org}"></label><br/>
+<label>Plant: </label><label th:text="${plant}"></label><br/>
+<label>Year: </label><label th:text="${year}"></label><br/>
+<label>Period: </label><label th:text="${period}"></label><br/>
+<label>Quantity Type: </label><label th:text="${qtyType}"></label></h3>
+
+<table style="border-collapse: collapse; width: 20%; height: 270px;" border="1">
+<tbody>
+<th:block th:each="i: ${#numbers.sequence(0, 19)}">
+<tr th:each="x: ${qResults}">
+   <td th:text="'PCB' + ${i+1}"></td>
+
+   <td th:text="${x[i]}"></td>
+
+</tr>
+</th:block>
+
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Upload COP Records</title>
+</head>
+<body style="background-color: #ADD8D6;">
+	<div align="center">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Download Excel File</h2>
+
+						<div th:if="${message}">
+							<h4 style="color: blue" th:text="${message}"></h4>
+						</div>
+						<div th:if="${error}">
+							<h4 style="color: red" th:text="${error}"></h4>
+						</div>
+						<form method="get" th:action="@{/downloadExcelFile}" >
+							<div class="form-group">
+								<table border="1">
+									<tr align="center">
+										
+									<tr align="center">
+										<td><button type="submit" class="btn btn-primary">Download Transaction Records
+												</button></td>
+									</tr>
+								</table>
+							<p><a href="uploadTransFile">Upload File</a> </p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

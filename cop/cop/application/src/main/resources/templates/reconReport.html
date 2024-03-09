@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<div layout:fragment="content">
+<div th:fragment="ReconReport">
+<div>
+<h5>
+<h2> Reconsilation report generated for </h2>
+<label>Org: </label><label th:text="${selectedOrg}"></label><br/>
+<label>Plant: </label><label th:text="${selectedPlant}"></label><br/>
+<label>Year: </label><label th:text="${selectedYear}"></label><br/>
+<label>Period: </label><label th:text="${selectedPeriod}"></label><br/>
+<label>Material: </label><label th:text="${selectedMaterial}"></label></h5>
+</div>	
+			
+						
+						<table cellpadding="1" cellspacing="1" border="1" style="width:500px ">
+	<thead>
+	
+		<tr>
+			<th scope="col">SL NO</th>
+			<th scope="col">DESCRIPTION</th>
+			<th scope="col">TOTAL AMOUNT</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=OPST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Opening Stock uploaded</a></td>
+			<!-- <td><button type="submit"  name="action" value="OPST">Opening stock uploaded</button></td>-->
+			<td th:text=${reconTotalAmtMap.get('OPST')}>-</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=MOST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Monthly Opening Stock</a></td>
+			<td th:text=${reconTotalAmtMap.get('MOST')}>-</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=WOST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">WIP Opening Stock</a></td>
+			<td th:text=${reconTotalAmtMap.get('WOST')}>-</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BMGR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}"> Materials Procured</a></td>
+			<td th:text=${reconTotalAmtMap.get('BMGR')}></td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BMSR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">services Procured</a></td>
+			<td th:text=${reconTotalAmtMap.get('BMSR')}>-</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BMVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Materials value difference</a></td>
+			<td th:text=${reconTotalAmtMap.get('BMVD')}>-</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BSVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Services value difference</a></td>
+			<td th:text=${reconTotalAmtMap.get('BSVD')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>LESS</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BMNA, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Material value difference not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('BMNA')}>-</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BSNA, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Services value difference not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('BSNA')}>-</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=BSQD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Services quantity difference not allocated</a></td>
+			
+			<td th:text=${reconTotalAmtMap.get('BSQD')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<B><strong>Net procurement value</strong></B>
+			</td>
+			<td th:text=${currency}+${netProcValue}>-</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SRST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Sales Return Value</a></td>
+			<td th:text=${reconTotalAmtMap.get('SRST')}>-</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Subcon processing charges</td>
+			<td th:text=${liTotalAmountMap.get('PC')}>-</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SMSR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon Services Received</a></td>
+			<td th:text=${reconTotalAmtMap.get('SMSR')}>-</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SVGR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Credit note + Debit note +DE</a></td>
+			<td th:text=${reconTotalAmtMap.get('SVGR')}>-&nbsp;</td>
+		</tr>
+		<tr>
+			<td>15</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SMVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon processing cost value difference</a></td>
+			<td th:text=${reconTotalAmtMap.get('SMVD')}>-</td>
+		</tr>
+		<tr>
+			<td>15 A</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SSVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon service value difference</a></td>
+			<td th:text=${reconTotalAmtMap.get('SSVD')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>LESS</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>16</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SMNA, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon PC value difference not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('SMNA')}>-</td>
+		</tr>
+		<tr>
+			<td>16 A</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SSNA, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon Service value difference not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('SSNA')}>-</td>
+		</tr>
+		<tr>
+			<td>16 B</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SVNA, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon  value  not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('SVNA')}>-</td>
+		</tr>
+		<tr>
+			<td>17</td>
+			<td><a th:href="@{/generateQtyTypeReport(qtyType=SSQD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Subcon Services quantity difference not allocated</a></td>
+			<td th:text=${reconTotalAmtMap.get('SSQD')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<B>Net subcon charges&nbsp;</B>
+			</td>
+			<td th:text=${currency}+${netsubconcharge}>-</td>
+		</tr>
+		<tr>
+			<td>18</td>
+			<td>Cost center Operation cost&nbsp;</td>
+			<td th:text=${liTotalAmountMap.get('OC')}>-</td>
+		</tr>
+		<tr>
+			<td>19</td>
+			<td>Cost center revaluation&nbsp;</td>
+			<td th:text=${liTotalAmountMap.get('OR')}>-</td>
+		</tr>
+		<tr>
+			<td>20</td>
+			<td>Cost center total cost&nbsp;</td>
+			<td th:text=${liTotalAmountMap.get('DE')}>-</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>Transfer Receipt value&nbsp; ( ONLY AT PLANT LEVEL)</td>
+			<td th:text=${trstTotalAmountMap.get('TRST')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<h2><strong>Total input cost&nbsp;</strong></h2>
+			</td>
+			<td th:text=${currency}+${totalInputCost}>-</td>
+		</tr>
+		<tr>
+			<td>22</td>
+			<td>Sales delivery cost&nbsp;</td>
+			<td th:text=${reconTotalAmtMap.get('SDST')}>-;</td>
+		</tr>
+		<tr>
+			<td>23</td>
+			<td>Inventory loss value&nbsp;</td>
+			<td th:text=${reconTotalAmtMap.get('ILST')}>-</td>
+		</tr>
+		<tr>
+			<td>24</td>
+			<td>Raw material stock value&nbsp;</td>
+			<td th:text=${rawTotalCost}>-</td>
+		</tr>
+		<tr>
+			<td>25</td>
+			<td>Semifinished good stock value&nbsp;</td>
+			<td th:text=${sfgTotalCost}>-</td>
+		</tr>
+		<tr>
+			<td>26</td>
+			<td>Finished goods stock value&nbsp;</td>
+			<td th:text=${fgTotalCost}>-</td>
+		</tr>
+		<tr>
+			<td>27</td>
+			<td>Consumables stock value&nbsp;</td>
+			<td th:text=${consTotalCost}>-</td>
+		</tr>
+		<tr>
+			<td>28</td>
+			<td>WIP closing value&nbsp;&nbsp;</td>
+			<td th:text=${reconTotalAmtMap.get('WIST')}>-</td>
+		</tr>
+		<tr>
+			<td>29</td>
+			<td>Transfer output cost&nbsp;</td>
+			<td th:text=${tostTotalAmountMap.get('TOST')}>-</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<h2><strong>Total output cost&nbsp;</strong></h2>
+			</td>
+			</b><td th:text=${currency}+${totalOutputCost}>-</td>
+		</tr>
+		
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</div>

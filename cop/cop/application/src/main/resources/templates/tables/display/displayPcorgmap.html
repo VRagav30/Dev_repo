@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROFIT CENTER ORGANISATION MAP</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchPcorgmap}" method="get">
+<button  style="float: left;"><a th:href="@{/insertPcorgmap}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by orgnisation code" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findPcorgmap}">
+			<h1>PROFIT CENTER ORGANISATION MAP</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">profitcr</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="pcorgmap : ${pcorgmaps}">
+						<td scope="row" th:text=${pcorgmap.pcompk}>-</td>
+						<td scope="row" th:text=${pcorgmap.orgncode}>-</td>
+						<td scope="row" th:text=${pcorgmap.profitcr}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertPcorgmap}" th:id="|edit_pcorgmap_${pcorgmap.pcompk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="pcompk" th:value="${pcorgmap.pcompk}">
+                       		<input type="hidden" name="profitcr" th:value="${pcorgmap.profitcr}">
+		                    <input type="hidden" name="orgncode" th:value="${pcorgmap.orgncode}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_pcorgmap_${pcorgmap.pcompk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertPcorgmap}" th:id="|delete_pcorgmap_${pcorgmap.pcompk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="pcompk" th:value="${pcorgmap.pcompk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_pcorgmap_${pcorgmap.pcompk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+						</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

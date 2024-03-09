@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>Cost Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>COST ACCOUNT</h1>
+            
+        
+            <form action="#"th:action="@{/insertCostAccount}"th:object="${coac}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+                <div class="form-group">
+                    <label for="costacc">Cost Account</label>
+                    <input class="form-control"type="number"th:field="*{costacc}"id="costacc"placeholder="COST ACCOUNT"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('costacc')}"th:errors="*{costacc}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sname">SHORT NAME</label>
+                    <input class="form-control"type="text"th:field="*{sname}"id="sname"placeholder="SHORT NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('sname')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="orgncode">ORGANSATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coyn">COYN</label>
+                   <input  type="radio"th:field="*{coyn}"id="coyn"name="coyn1"value="YES">
+					<label for="coyn1">YES</label><br>
+					<input type="radio"th:field="*{coyn}"id="coyn"name="coyn2"value="NO">
+					<label for="coyn2">NO</label><br>
+					
+                </div>
+                
+               <div class="form-group">
+                    <label for="cagrp">COST ACC GROUP</label>
+                    <input class="form-control"type="text"th:field="*{cagrp}"id="cagrp"placeholder="Cost Acc Group"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cagrp')}"th:errors="*{cagrp}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="opgrp">OPERATION GROUP</label>
+                    <input class="form-control"type="text"th:field="*{opgrp}"id="opgrp"placeholder="GROUP" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('opgrp')}"th:errors="*{opgrp}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pcagrp">PARTNER COST AACCOUNT GROUP</label>
+                    <input class="form-control"type="text"th:field="*{pcagrp}"id="pcagrp"placeholder="GROUP" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('pcagrp')}"th:errors="*{pcagrp}"></div>
+                </div>
+                
+                
+                
+                <div class="form-group">
+                    <label for="ccbgrm">CCBGRM</label><br>   
+                    <input  type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm1"value="F">
+					<label for="ccbgrm1">FIXED</label>
+					<input type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm2"value="V">
+					<label for="ccbgrm2">VARIABLE</label>
+					<input type="radio"th:field="*{ccbgrm}"id="ccbgrm"name="ccbgrm2"value="M">
+					<label for="ccbgrm3">MIXED</label>
+					<div class="alert alert-warning"th:if="${#fields.hasErrors('ccbgrm')}"th:errors="*{text}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="cafrom">FROM DATE</label>
+                    <input class="form-control"type="date"th:field="*{cafrom}"id="cafrom"placeholder="FROM DATE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cafrom')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cato">TO DATE</label>
+                    <input class="form-control"type="date"th:field="*{cato}"id="cato"placeholder="to date"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cato')}"th:errors="*{date}"></div>
+                </div>
+              
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

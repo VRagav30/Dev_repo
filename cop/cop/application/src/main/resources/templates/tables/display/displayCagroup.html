@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAGROUP</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchCagroup}" method="get">
+<button  style="float: left;"><a th:href="@{/insertCagroup}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by cost account group" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findCagroup}">
+			<h1>CAGROUP</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">cagrp</th>
+						<th scope="col">costaccd</th>
+						<th scope="col">orgncode</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="cag : ${cags}">
+
+						<td scope="row" th:text=${cag.cagrp}>-</td>
+						<td scope="row" th:text=${cag.costaccd}>-</td>
+						<td scope="row" th:text=${cag.orgncode}>-</td>
+						<td>
+						<form></form>
+                        <form th:action="@{/insertCagroup}" th:id="|edit_cag_${cag.cagrp}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="cagrp" th:value="${cag.cagrp}">
+                       		<input type="hidden" name="costaccd" th:value="${cag.costaccd}">
+		                    <input type="hidden" name="orgncode" th:value="${cag.orgncode}">
+		                    <a href="#" th:data-elementid="|edit_cag_${cag.cagrp}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    	
+              			</form>
+              			</td>
+                    	<td>
+                        	<form th:action="@{/insertCagroup}" th:id="|delete_cag_${cag.cagrp}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="cagrp" th:value="${cag.cagrp}">
+		                     <a href="#" th:data-elementid="|delete_cag_${cag.cagrp}|" th:onclick="|document.getElementById(this.getAttribute('data-elementid')).submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+                    		</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

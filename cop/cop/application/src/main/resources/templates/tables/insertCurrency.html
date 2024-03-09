@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Currency</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+   <div layout:fragment="content">
+        <div class="row">
+            <h1>CURRENCY</h1>
+            
+            <form action="#" th:action="@{/insertCurrency}" th:object="${cu}" method="post" class="form">
+            
+            <div class="form-group">
+                    <label for="currn">CURRENCY NAME</label>
+                    <input class="form-control" type="text" th:field="*{currn}" id="currn" placeholder="String" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('currn')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="currc">CURRENCY INTERNATION CODE</label>
+                    <input class="form-control" type="text" th:field="*{currc}" id="currc" placeholder="String" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('currc')}" th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="currd">CURRENCY DECIMALS</label>
+                    <input class="form-control" type="text" th:field="*{currd}" id="currd" placeholder="integer" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('currd')}" th:errors="*{integer}"></div>
+                </div>
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>

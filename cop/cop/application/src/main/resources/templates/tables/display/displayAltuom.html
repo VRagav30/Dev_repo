@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALTUOM</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<form th:action="@{/searchAltuom}" method="get">
+<button  style="float: left;"><a th:href="@{/insertAltuom}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ItemCode" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findAltuom}">
+			<h1>ALTUOM</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">altuomid</th>
+						<th scope="col">altuom</th>
+						<th scope="col">altuomqty</th>
+						<th scope="col">buom</th>
+						<th scope="col">buqty</th>
+						<th scope="col">itemcode</th>
+						<th scope="col">itemtype</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">plant</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="alt : ${alts}">
+
+						<td scope="row" th:text=${alt.altuomid}>-</td>
+						<td scope="row" th:text=${alt.altuom}>-</td>
+						<td scope="row" th:text=${alt.altuomqty}>-</td>
+						<td scope="row" th:text=${alt.buom}>-</td>
+						<td scope="row" th:text=${alt.buqty}>-</td>
+						<td scope="row" th:text=${alt.itemcode}>-</td>
+						<td scope="row" th:text=${alt.itemtype}>-</td>
+						<td scope="row" th:text=${alt.orgncode}>-</td>
+						<td scope="row" th:text=${alt.plant}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertAltuom}" th:id="|edit_alt_${alt.altuomid}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="altuomid" th:value="${alt.altuomid}">
+                       		<input type="hidden" name="altuom" th:value="${alt.altuom}">
+		                    <input type="hidden" name="altuomqty" th:value="${alt.altuomqty}">
+		                    <input type="hidden" name="buom" th:value="${alt.buom}">
+		                    <input type="hidden" name="buqty" th:value="${alt.buqty}">
+		                    <input type="hidden" name="itemcode" th:value="${alt.itemcode}">
+		                    <input type="hidden" name="itemtype" th:value="${alt.itemtype}">
+		                    <input type="hidden" name="orgncode" th:value="${alt.orgncode}">
+		                    <input type="hidden" name="plant" th:value="${alt.plant}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_alt_${alt.altuomid}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertAltuom}" th:id="|delete_alt_${alt.altuomid}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="altuomid" th:value="${alt.altuomid}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_alt_${alt.altuomid}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+
+
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

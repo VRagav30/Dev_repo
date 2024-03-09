@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+	<head>
+<link rel="stylesheet" type="text/css" href="css/table.css">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	<form  method="post" th:action="@{/saveActivityPrice}" >
+	<h3><label>Org: </label><label th:text="${org}"></label><input type="hidden" th:value="${org}" name="org" id="org"/><br/>
+		<label>Plant: </label><label th:text="${plant}"></label><input type="hidden" th:value="${plant}" name="plant" id="plant"/><br/>
+		<label>Year: </label><label th:text="${year}"></label><input type="hidden" th:value="${year}" name="year" id="year"/><br/>
+		<label>Period: </label><label th:text="${period}"></label><input type="hidden" th:value="${period}" name="period" id="period"/><br/>
+	</h3>
+		<div th:if="${results!=null && !results.empty}">
+			<table border=1 style="background-color: WHITE;">
+				<thead>
+				<tr>
+					<tr>
+						
+						<th>TRANSACTION EVENT</th>
+						<th>CCTR</th>
+						<th>CAGRP</th>
+						<th>OPGRP</th>
+						<th>OPRN</th>
+						<th>OPRN</th>
+						<th>OPUOM</th>
+						<th>CCBGRM</th>
+						<th>OPRN AVAILABILITY</th>
+						<th>POSTEDAMOUNT</th>
+						<th> OPGAMOUNT</th>
+						<th>Allocated to amount</th>
+						<th>Allocated from amount</th>
+						<th>Fixed Amount</th>
+						<th>Variable Amount</th>
+						<th>total amount</th>
+						<th>CAPQTY</th>
+						<th>OPRN QTY</th>
+						<th>FIXEDPRICE</th>
+						<th>VARPRICE</th>
+						<th>TOTPRICE</th>
+						<th>COSTACC</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="result : ${results}">
+
+						<td th:text=${result.trnsevent}>-</td>
+						<td th:text=${result.objcode}>-</td>
+						<td th:text=${result.cagrp}>-</td>
+						<td th:text=${result.opgrp}>-</td>
+						<td th:text=${result.oprn}>-</td>
+						<td th:text=${result.oprn}>-</td>
+						<td th:text=${result.oprnuom}>-</td>
+						<td th:text=${result.ccgrm}>-</td>
+						<td th:text=${result.oprnavailability}>-</td>
+						<td th:text=${result.postedamount}>-</td>
+						<td th:text=${result.opgamount}>-</td>
+						<td th:text=${result.allocatedtoamount}>-</td>
+						<td th:text=${result.allocatedfromamount}>-</td>
+						<td th:text=${result.fixedamount}>-</td>
+						<td th:text=${result.variableamount}>-</td>
+						<td th:text=${result.totalamount}>-</td>
+						<td th:text=${result.capqty}>-</td>
+						<td th:text=${result.oprnqty}>-</td>
+						<td th:text=${result.fixedprice}>-</td>
+						<td th:text=${result.variableprice}>-</td>
+						<td th:text=${result.totalprice}>-</td>
+						<td th:text=${result.costacc}>-</td>
+				</tbody>
+
+				</tr>
+			</table>
+			<p></p>
+				<p></p>
+					<p></p>
+					
+			<div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="submit" name="save" class="btn btn-lg btn-primary btn-block" value="SAVE"/>
+                        </div>
+                   
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="submit" name="canel" class="btn btn-lg btn-primary btn-block" value="CANCEL"/>
+                        </div>
+                       
+                    </div>
+		
+
+
+		</div>
+		</form>
+	</div>
+</body>
+</html>

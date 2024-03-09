@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COAC</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchCoac}" method="get">
+<button  style="float: left;"><a th:href="@{/insertCoac}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by costacc" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findCoac}">
+			<h1>COAC</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+
+						<th scope="col">costacc</th>
+						<th scope="col">cafrom</th>
+						<th scope="col">cato</th>
+						<th scope="col">coyn</th>
+						<th scope="col">cagrp</th>
+						<th scope="col">pcagrp</th>
+						<th scope="col">opgrp</th>
+						<th scope="col">coacgrm</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">sname</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="coac : ${coacs}">
+
+						<td scope="row" th:text=${coac.costacc}>-</td>
+						<td scope="row" th:text=${coac.cafrom}>-</td>
+						<td scope="row" th:text=${coac.cato}>-</td>
+						<td scope="row" th:text=${coac.coyn}>-</td>
+						<td scope="row" th:text=${coac.cagrp}>-</td>
+						<td scope="row" th:text=${coac.pcagrp}>-</td>
+						<td scope="row" th:text=${coac.opgrp}>-</td>
+						<td scope="row" th:text=${coac.ccbgrm}>-</td>
+						<td scope="row" th:text=${coac.orgncode}>-</td>
+						<td scope="row" th:text=${coac.sname}>-</td>
+						 <td>
+                        <form></form>
+                      	 <form th:action="@{/insertCoac}" th:id="|edit_coac_${coac.costacc}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="costacc" th:value="${coac.costacc}">
+                       		<input type="hidden" name="cafrom" th:value="${coac.cafrom}">
+		                    <input type="hidden" name="cato" th:value="${coac.cato}">
+		                    <input type="hidden" name="coyn" th:value="${coac.coyn}">
+		                    <input type="hidden" name="cagrp" th:value="${coac.cagrp}">
+		                    <input type="hidden" name="opgrp" th:value="${coac.opgrp}">
+		                    <input type="hidden" name="ccbgrm" th:value="${coac.ccbgrm}">
+		                    <input type="hidden" name="orgncode" th:value="${coac.orgncode}">
+		                    <input type="hidden" name="sname" th:value="${coac.sname}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_coac_${coac.costacc}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertCoac}" th:id="|delete_coac_${coac.costacc}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="costacc" th:value="${coac.costacc}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_coac_${coac.costacc}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

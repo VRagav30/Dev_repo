@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPERATION GROUP</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchOpg}" method="get">
+<button  style="float: left;"><a th:href="@{/insertOpg}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by operation" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findOpg}">
+			<h1>OPERATION GROUP</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">allocmethod</th>
+						<th scope="col">grpd</th>
+						<th scope="col">opgrp</th>
+						<th scope="col">oprn</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">sname</th>
+						<th scope="col">value</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="opg: ${opgs}">
+
+						<td scope="row" th:text=${opg.allocmethod}>-</td>
+						<td scope="row" th:text=${opg.grpd}>-</td>
+						<td scope="row" th:text=${opg.opgrp}>-</td>
+						<td scope="row" th:text=${opg.oprn}>-</td>
+						<td scope="row" th:text=${opg.orgncode}>-</td>
+						<td scope="row" th:text=${opg.sname}>-</td>
+						<td scope="row" th:text=${opg.value}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertOpg}" th:id="|edit_opg_${opg.opgrp}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="opgrp" th:value="${opg.opgrp}">
+                       		<input type="hidden" name="allocmethod" th:value="${opg.allocmethod}">
+		                    <input type="hidden" name="grpd" th:value="${opg.grpd}">
+		                    <input type="hidden" name="oprn" th:value="${opg.oprn}">
+		                    <input type="hidden" name="orgncode" th:value="${opg.orgncode}">
+		                    <input type="hidden" name="sname" th:value="${opg.sname}">
+		                    <input type="hidden" name="value" th:value="${opg.value}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_opg_${opg.opgrp}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertOpg}" th:id="|delete_opg_${opg.opgrp}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="opgrp" th:value="${opg.opgrp}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_opg_${opg.opgrp}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>Alternate Unit Of Measure</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>Alternate Unit Of Measure</h1>
+            
+        
+            <form action="#"th:action="@{/insertAltuom}"th:object="${alt}"method="post"class="form">
+            
+            <div class="form-group">
+            
+             <div class="form-group">
+                    <label for="orgncode">ORGANISATION CODE</label>
+                    <input class="form-control"type="text"th:field="*{orgncode}"id="orgncode"placeholder="ORGANISATION CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('orgncode')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="plant">Plant</label>
+                    <input class="form-control"type="text"th:field="*{plant}"id="plant"placeholder="PLANT CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('plant')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="itemcode">ITEM CODE</label>
+                    <input class="form-control"type="date"th:field="*{itemcode}"id="itemcode"placeholder="ITEM CODE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('itemcode')}"th:errors="*{itemcode}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemtype">ITEM TYPE</label>
+                    <input class="form-control"itemtype="text"th:field="*{itemtype}"id="itemtype"placeholder="ITEM TYPE"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('itemtype')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="buom">Unit of Measure</label>
+                    <input class="form-control"type="text"th:field="*{buom}"id="buom"placeholder="UOM"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('buom')}"th:errors="*{integer}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="buqty">Base Quantity</label>
+                    <input class="form-control"type="number"th:field="*{buqty}"id="buqty"placeholder="Base Quantity" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('buqty')}"th:errors="*{number}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="altuom">Alternate UOM</label>
+                    <input class="form-control"type="text"th:field="*{altuom}"id="altuom"placeholder="Alternate UOM"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('altuom')}"th:errors="*{integer}"></div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="altuomqty">Base Quantity</label>
+                    <input class="form-control"type="number"th:field="*{altuomqty}"id="altuomqty"placeholder="Base Quantity" required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('altuomqty')}"th:errors="*{number}"></div>
+                </div>
+                    <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>

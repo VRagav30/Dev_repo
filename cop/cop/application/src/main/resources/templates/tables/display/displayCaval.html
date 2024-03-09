@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAVAL</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+<p>
+	<form th:action="@{/searchCaval}" method="get">
+<button  style="float: left;"><a th:href="@{/insertCaval}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Costacc" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+		<form method="post" th:action="@{/findCaval}">
+			<h1>CAVAL</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">cavalpk</th>
+						<th scope="col">costacc</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">valgrp</th>
+						<th scope="col">vevent</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="caval: ${cavals}">
+
+						<td scope="row" th:text=${caval.cavalpk}>-</td>
+						<td scope="row" th:text=${caval.costacc}>-</td>
+						<td scope="row" th:text=${caval.orgncode}>-</td>
+						<td scope="row" th:text=${caval.valgrp}>-</td>
+						<td scope="row" th:text=${caval.vevent}>-</td>
+						 <td>
+                        <form></form>
+                      	 <form th:action="@{/insertCaval}" th:id="|edit_caval_${caval.cavalpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="cavalpk" th:value="${caval.cavalpk}">
+                       		<input type="hidden" name="costacc" th:value="${caval.costacc}">
+		                    <input type="hidden" name="orgncode" th:value="${caval.orgncode}">
+		                    <input type="hidden" name="valgrp" th:value="${caval.valgrp}">
+		                    <input type="hidden" name="vevent" th:value="${caval.vevent}">
+		                    <a href="#"  th:onclick="|document.getElementById('edit_caval_${caval.cavalpk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertCaval}" th:id="|delete_caval_${caval.cavalpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="cavalpk" th:value="${caval.cavalpk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_caval_${caval.cavalpk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

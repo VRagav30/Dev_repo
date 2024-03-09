@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Header</title>
+</head>
+
+<body>
+
+	<div th:fragment="sidebar">
+	
+	<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAuthority('SuperAdmin')" >
+			<div class="panel-heading">Initial setup</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;  ">
+					<a Text color:balck; th:href="@{/findOrganisation}">Organisation</a><br/>
+					<a th:href="@{/findOGN}">Organisation Govt Number</a><br/>
+					<a th:href="@{/findUser}">User Details</a><br/>
+					<a th:href="@{/findPermission}">Permissions</a><br/>
+					<a th:href="@{/findRole}">Roles</a><br/>
+					<a th:href="@{/findUserRole}">User Role Mapping</a><br/>
+					<a th:href="@{/findPermissionRole}">Permission Role Mapping</a><br/>
+					</div>
+					</div>
+	</div>
+	
+	<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAnyAuthority('OrgAdmin','SuperAdmin')" >
+	
+			<div class="panel-heading">Organisation Level Data Setup</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;  ">
+					
+					<a Text color:balck; th:href="@{/findBatch}"> Batch</a><br/>
+					<a th:href="@{/findPlant}">Plant</a><br/>
+					<a th:href="@{/findValgrp}">Value Group</a><br/>
+					<a th:href="@{/findVevent}">Events</a><br/>
+		</div>
+					</div>
+	</div>
+	
+	
+	
+		<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAnyAuthority('MasterData','OrgAdmin','SuperAdmin')" >
+			<div class="panel-heading">Master Data</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;  ">
+					
+					<a th:href="@{/findUom}">Unit of Measure</a><br/>
+					<a th:href="@{/findVendor}">Vendor</a><br/>
+					<a th:href="@{/findMaterial}">Material</a><br/>
+					<a th:href="@{/findMrc}">MRC</a><br/>
+					<a th:href="@{/findServiceitem}">Service</a><br/>
+								
+			</div>
+			</div>
+		</div>
+		
+	<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAnyAuthority('Costing','OrgAdmin','SuperAdmin')" >
+			<div class="panel-heading">Costing</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;">
+				<a th:href="@{/findCurrencyER}">Currency Exchange Rate</a><br/>
+					<a th:href="@{/findCustomer}">Customer </a><br/>
+					<a th:href="@{/findCaval}">Caval</a><br/>
+					<a th:href="@{/findCoac}">Cost Account</a><br/>
+					<a th:href="@{/findCc}">Cost Center</a><br/>
+					<a th:href="@{/findCcgroup}">CostCenter Group</a><br/>
+					<a th:href="@{/findCagroup}">CostAccount Group</a><br/>
+					<a th:href="@{/findProfitcenter}">Profit Center</a><br/>
+					<a th:href="@{/findPGN}">Plant Govt Number</a><br/>
+					<a th:href="@{/findPcorgmap}">Profit Center Orgnaisation Map</a><br/>
+					
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAnyAuthority('Finance','OrgAdmin','SuperAdmin')" >
+			<div class="panel-heading">Configuration Steps</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;">
+				<a th:href="@{/findCurrency}">Currency</a><br/>
+				<a th:href="@{/findCountry}">Country</a><br/>
+				<a th:href="@{/findFyd}">Fiscal Year</a><br/>
+				<a th:href="@{/findFydPeriod}">Fiscal Year Period</a><br/>
+				<a th:href="@{/findPcb}">Product Cost BreakUp</a><br/>
+					<a th:href="@{/findCcb}">Cost Center BreakUp</a><br/>
+					<a th:href="@{/findAssignccb}">Assign CostCenter Breakup</a><br/>
+					<a th:href="@{/findNumberRange}">Number Range</a><br/>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default" sec:authorize="isAuthenticated()  && hasAnyAuthority('Prod','OrgAdmin','SuperAdmin')" >
+			<div class="panel-heading">Production</div>
+			<div class="panel-body">
+				<div style="padding-bottom: 5px;">
+				<a th:href="@{/findAltuom}">Alternate Unit of Measure</a><br/>
+				<a th:href="@{/findBom}">Bill Of Material</a><br/>
+				<a th:href="@{/findOprn}">Operation</a><br/>
+				<a th:href="@{/findOpg}">Operation Group</a><br/>
+				<a th:href="@{/findPcard}">Process Card</a><br/>
+				<a th:href="@{/findPstep}">Process Step</a><br/>
+				<a th:href="@{/findPstepops}">Process Step Operations</a><br/>
+					
+				</div>
+			</div>
+		</div>
+		
+	</div>	
+
+</body>
+
+</html>

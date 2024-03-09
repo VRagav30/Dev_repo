@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROCESS CARD</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	
+<p>
+<p>
+	<form th:action="@{/searchPcard}" method="get">
+<button  style="float: left;"><a th:href="@{/insertPcard}">ADD </a></button>
+  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Material or Plant" size="50"  >
+  <button type="submit" class="btn btn-info"  style="float: right;">Search</button>
+  <button type="reset" class="btn btn-info"  style="float: right;" >Reset</button>
+  </form>
+  <br><br>
+		<div th:if="${message}">
+				<h4 style="color: blue" th:text="${message}"></h4>
+		</div>
+		<div th:if="${error}">
+				<h4 style="color: red" th:text="${error}"></h4>
+		</div>
+		<form method="post" th:action="@{/uploadEntityFile?fileType=Processcard}" enctype="multipart/form-data">
+		<input type="file" name="file">
+			<button type="submit" class="btn btn-info" style="float: left;">Bulk Upload</button>
+			
+		</form><br><br>
+  
+		<form method="post" th:action="@{/findPcard}">
+			<h1>PROCESS CARD</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">matlcode</th>
+						<th scope="col">ostat</th>
+						<th scope="col">plant</th>
+						<th scope="col">prscnum</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="pcard: ${pcards}">
+
+						<td scope="row" th:text=${pcard.matlcode}>-</td>
+						<td scope="row" th:text=${pcard.ostat}>-</td>
+						<td scope="row" th:text=${pcard.plant}>-</td>
+						<td scope="row" th:text=${pcard.prscnum}>-</td>
+						<td scope="row" th:text=${pcard.valfdate}>-</td>
+						<td scope="row" th:text=${pcard.valtdate}>-</td>
+						 <td>
+                        <form></form>
+                      	 <form th:action="@{/insertPcard}" th:id="|edit_pcard_${pcard.prscnum}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="prscnum" th:value="${pcard.prscnum}">
+                       		<input type="hidden" name="matlcode" th:value="${pcard.matlcode}">
+		                    <input type="hidden" name="ostat" th:value="${pcard.ostat}">
+		                    <input type="hidden" name="plant" th:value="${pcard.plant}">
+		                    <input type="hidden" name="valfdate" th:value="${pcard.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${pcard.valtdate}">
+		                    
+		                    <a href="#"  th:onclick="|document.getElementById('edit_pcard_${pcard.prscnum}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertPcard}" th:id="|delete_pcard_${pcard.prscnum}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="prscnum" th:value="${pcard.prscnum}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_pcard_${pcard.prscnum}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+
+
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

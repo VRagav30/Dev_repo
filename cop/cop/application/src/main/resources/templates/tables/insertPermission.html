@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>PERMISSIOM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>PERMISSIOM</h1>
+            
+        
+            <form action="#"th:action="@{/insertRole}"th:object="${permission}"method="post"class="form">
+            
+            <div class="form-group">
+                
+                <div class="form-group">
+                    <label for="permissionId">permissionId</label>
+                    <input class="form-control"type="text"th:field="*{permissionId}"id="permissionId"placeholder="FIRST NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('permissionId')}"th:errors="*{integer}"></div>
+                </div>
+                
+                
+                
+                 <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input class="form-control"type="text"th:field="*{Name}"id="Name"placeholder="NAME"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('Name')}"th:errors="*{integer}"></div>
+                </div>
+                
+                
+                
+                
+                 <div class="form-group">
+                    <label for="description">DESCRIPTION</label>
+                    <input class="form-control"type="text"th:field="*{description}"id="description"placeholder="DESCRIPTION"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('description')}"th:errors="*{integer}"></div>
+                </div>           
+                        
+                
+                
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+                
+                         <input type="submit" class="btn btn-success"value="Add">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>

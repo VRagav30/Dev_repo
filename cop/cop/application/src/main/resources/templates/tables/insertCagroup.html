@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COST ACCOUNT GROUP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <h1>Cost Account Group</h1>
+            
+            <form action="#" th:action="@{/insertCagroup}" th:object="${cag}" method="post" class="form">
+               
+                <div class="form-group">
+                    <label for="cagrp">COST ACCOUNT GROUP</label>
+                    <input class="form-control" type="text" th:field="*{cagrp}" id="cagrp" placeholder="COST ACCOUNT GROUP" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('cagrp')}" th:errors="*{fullName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="orgncode">ORGANISATION CODE</label>
+                    <input class="form-control" type="text" th:field="*{orgncode}" id="orgncode" placeholder="ORGANISATION CODE" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('orgncode')}" th:errors="*{orgncode}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="costaccd">COST ACCOUNT DESCRIPTION</label>
+                    <input class="form-control" type="text" th:field="*{costaccd}" id="costaccd" placeholder="COST ACCOUNT DESCRIPTION" required="true" autofocus="true">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('costaccd')}" th:errors="*{costaccd}"></div>
+                </div>
+                
+                <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+<head>
+<title>Upload COP Records</title>
+
+</head>
+
+<body >
+
+<div layout:fragment="content">
+
+	<div align="center" style="margin-top: 10px">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Upload Transaction File</h2>
+
+						<div th:if="${message}">
+							<h4 style="color: blue" th:text="${message}"></h4>
+						</div>
+						<div th:if="${error}">
+							<h4 style="color: red" th:text="${error}"></h4>
+						</div>
+						<form method="post" th:action="@{/uploadTransFile}"
+							enctype="multipart/form-data">
+							<div class="form-group">
+								<table border="1">
+									<tr align="center">
+										<td>File Type <select id="fileType"
+											name="fileType">
+												<option>Select</option>
+												<option value="Orders">Orders</option>
+												<option value="Transactions">Transactions</option>
+												<option value="Costing">Costing</option>
+										</select></td>
+									</tr>
+									<tr align="center">
+										<td><input type="file" name="file"></td>
+									</tr>
+									<tr align="center">
+										<td><button type="submit" class="btn btn-primary">Upload
+												File</button></td>
+									</tr>
+								</table>
+							</div>
+							<!--  <p>Download<a href="downloadExcelFile">Download File</a> </p>-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	</div>
+</body>
+</html>

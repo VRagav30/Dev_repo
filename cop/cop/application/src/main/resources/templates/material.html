@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+
+<div layout:fragment="content">
+<div th:fragment="materialReport">
+<div>
+<h5><label>Org: </label><label th:text="${org}"></label><br/>
+<label>Plant: </label><label th:text="${plant}"></label><br/>
+<label>Year: </label><label th:text="${year}"></label><br/>
+<label>Period: </label><label th:text="${period}"></label><br/>
+<label>Material: </label><label th:text="${mat}"></label></h5>
+
+</div>			
+						
+						<table cellpadding="1" cellspacing="1" border="1" style="width:500px ">
+	<thead>
+	
+		<tr>
+			<th scope="col">SL NO</th>
+			<th scope="col">DESCRIPTION</th>
+			<th scope="col">QUANTITY</th>
+			<th scope="col">SUB TOTAL AMOUNT</th>
+			<th scope="col">TOTAL AMOUNT</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td>1</td>
+			<td><a th:href="@{/matTotalAmtMap(qtyType=OPST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Opening Stock uploaded</a></td>
+			<!-- <td><button type="submit"  name="action" value="OPST">Opening stock uploaded</button></td>-->
+			<td th:text=${matTotalQtyMap.get('OPST')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('OPST')}>-</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('MOST') != null}">
+			<td>2</td>
+			<td><a  th:href="@{/matTotalAmtMap(qtyType=MOST, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Monthly Opening Stock</a></td>
+			<td th:text=${matTotalQtyMap.get('MOST')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('MOST')}>-</td>
+		</tr>
+		<tr th:if="${procAdd != null}">
+			<td>&nbsp;</td>
+			<td>PROCUREMENT</td>
+			<td>&nbsp;</td>
+			<td th:text=${procAdd}>-</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('BMGR') != null}">
+			<td>3</td>
+			<td><a th:href="@{/matTotalAmtMap(qtyType=BMGR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}"> Materials Procured</a></td>
+			<td th:text=${matTotalQtyMap.get('BMGR')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BMGR')}></td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('BMSR') != null}">
+			<td>4</td>
+			<td><a th:href="@{/matTotalAmtMap(qtyType=BMSR, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">services Procured</a></td>
+			<td th:text=${matTotalQtyMap.get('BMSR')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BMSR')}>-</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('BMVD') != null}">
+			<td>5</td>
+			<td><a th:href="@{/matTotalAmtMap(qtyType=BMVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Materials value difference</a></td>
+			<td th:text=${matTotalQtyMap.get('BMVD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BMVD')}>-</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('BSVD') != null}">
+			<td>6</td>
+			<td><a th:href="@{/matTotalAmtMap(qtyType=BSVD, org=${selectedOrg}, plant=${selectedPlant}, year=${selectedYear}, period=${selectedPeriod} )}">Services value difference</a></td>
+			<td th:text=${matTotalQtyMap.get('BMVD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BSVD')}>-</td>
+		</tr>
+		<tr th:if="${procSub != null}">
+			<td>&nbsp;</td>
+			<td>PROCUREMENT LESS</td>
+			<td>&nbsp;</td>
+			<td th:text=${procSub}>-</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr th:if="${procSub != null}">
+			<td>7</td>
+			<td>Material value difference not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('BMNA')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BMNA')}>-</td>
+		</tr>
+		<tr th:if="${procSub != null}">
+			<td>8</td>
+			<td>Service value difference not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('BSNA')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BSNA')}>-</td>
+		</tr>
+		<tr th:if="${procSub != null}">
+			<td>9</td>
+			<td>Services Quantity &nbsp;difference not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('BSQD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('BSQD')}>-</td>
+		</tr>
+		
+		<tr th:if="${netProcValue != null}">
+			<td>&nbsp;</td>
+			<td>NET PROCUREMENT AMOUNT</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td th:text=${netProcValue}>-</td>
+		</tr>
+		
+		<tr th:if="${subconAdd != null}">
+			<td>&nbsp;</td>
+			<td>SUBCON</td>
+			<td>&nbsp;</td>
+			<td th:text=${subconAdd}>-</td>
+			<td>&nbsp;</td>
+		</tr>
+		
+		<tr th:if="${matTotalAmtMap.get('SMSR') != null}">
+			<td>10</td>
+			<td>Subcon services received&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SMSR')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SMSR')}>-</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('SVGR') != null}">
+			<td>11</td>
+			<td>Credit note + debit note +DE&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SVGR')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SVGR')}>-&nbsp;</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('SMVD') != null}">
+			<td>12</td>
+			<td>Subcon processing cost value difference&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SMVD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SMVD')}>-</td>
+		</tr>
+		<tr th:if="${matTotalAmtMap.get('SSVD') != null}">
+			<td>13 A</td>
+			<td>Subcon service value difference &nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SSVD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SSVD')}>-</td>
+		</tr>
+			<tr th:if="${subconSub != null or subconSub!=0}">
+			<td>&nbsp;</td>
+			<td>SUBCON LESS</td>
+			<td>&nbsp;</td>
+			<td th:text=${subconSub}>-</td>
+			<td>&nbsp;</td>
+		</tr>
+			<tr th:if="${matTotalAmtMap.get('SMNA') != null}">
+			<td>14</td>
+			<td>Subcon PC value difference not allocated &nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SMNA')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SMNA')}>-</td>
+		</tr>
+			<tr th:if="${matTotalAmtMap.get('SSNA') != null}">
+			<td>14 A</td>
+			<td>Subcon Service value difference not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SSNA')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SSNA')}>-</td>
+		</tr>
+			<tr th:if="${matTotalAmtMap.get('SVNA') != null}">
+			<td>14 B</td>
+			<td>Subcon  value  not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SVNA')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SVNA')}>-</td>
+		</tr>
+			<tr th:if="${matTotalAmtMap.get('SSQD') != null}">
+			<td>15</td>
+			<td>Subcon Services quantity difference not allocated&nbsp;</td>
+			<td th:text=${matTotalQtyMap.get('SSQD')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${matTotalAmtMap.get('SSQD')}>-</td>
+		</tr>
+		
+			<tr th:if="${netsunconcharge != null or netsubconcharge !=0}">
+			<td>&nbsp;</td>
+			<td>SUBCON NET AMOUNT</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td th:text=${netsubconcharge}>-</td>
+		</tr>
+		<tr th:if="${trstTotalQtyMap.get('TRST') != null or trstTotalQtyMap.get('TRST') !=0}">
+			<td>16</td>
+			<td>Transfer Receipt value&nbsp;</td>
+			<td th:text=${trstTotalQtyMap.get('TRST')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${trstTotalAmountMap.get('TRST')}>-</td>
+		</tr>
+		
+		
+		<tr th:if="${tostTotalAmountMap.get('TOST') !=null or tostTotalAmountMap.get('TOST') !=0}">
+			<td>17</td>
+			<td>Transfer output cost&nbsp;</td>
+			<td th:text=${tostTotalQtyMap.get('TOST')}>-</td>
+			<td>&nbsp;</td>
+			<td th:text=${tostTotalAmountMap.get('TOST')}>-</td>
+		</tr>
+		
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</div>
+</div>
+</html>

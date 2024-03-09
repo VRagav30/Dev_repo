@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assign CCB</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content">
+	<p>
+		<p>
+		<form th:action="@{/insertAssignccb}" method="get" class="pull-left">
+		<button type="submit" class="btn btn-info">ADD </a></button>
+		</form>
+		<form th:action="@{/searchAssignccb}" method="get" class="pull-right">
+				<input type="text" name="keyword"  th:value="${keyword}"
+				placeholder="Find by Cost center" size="50">
+			<button type="submit" class="btn btn-info" style="float: right;">Search</button>
+			<button type="reset" class="btn btn-info" style="float: right;">Reset</button>
+		</form><br>
+		<form method="post" th:action="@{/findAssignccb}">
+			<h1>Assign CCB</h1>
+
+			<table class="table table-success table-striped">
+				<thead>
+					<tr>
+						<th scope="col">accbpk</th>
+						<th scope="col">ccbcode</th>
+						<th scope="col">cctr</th>
+						<th scope="col">orgncode</th>
+						<th scope="col">valfdate</th>
+						<th scope="col">valtdate</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="accb : ${accbs}">
+						<td scope="row" th:text=${accb.accbpk}>-</td>
+						<td scope="row" th:text=${accb.ccbcode}>-</td>
+						<td scope="row" th:text=${accb.cctr}>-</td>
+						<td scope="row" th:text=${accb.orgncode}>-</td>
+						<td scope="row" th:text=${accb.valfdate}>-</td>
+						<td scope="row" th:text=${accb.valtdate}>-</td>
+						<td>
+                        <form></form>
+                      	 <form th:action="@{/insertAssignccb}" th:id="|edit_accb_${accb.accbpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="edit">
+                       		<input type="hidden" name="accbpk" th:value="${accb.accbpk}">
+                       		<input type="hidden" name="ccbcode" th:value="${accb.ccbcode}">
+		                    <input type="hidden" name="cctr" th:value="${accb.cctr}">
+		                    <input type="hidden" name="orgncode" th:value="${accb.orgncode}">
+		                    <input type="hidden" name="valfdate" th:value="${accb.valfdate}">
+		                    <input type="hidden" name="valtdate" th:value="${accb.valtdate}">
+		                    
+		                    <a href="#"  th:onclick="|document.getElementById('edit_accb_${accb.accbpk}').submit();|" class="btn btn-primary a-btn-slide-text">
+		                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+              			</td>
+                        <td>
+                          <form th:action="@{/insertAssignccb}" th:id="|delete_accb_${accb.accbpk}|" method="post">
+                       		<input type="hidden" name="mode" th:value="delete">
+                       		<input type="hidden" name="accbpk" th:value="${accb.accbpk}">
+		                    <a href="#"  th:onclick="|document.getElementById('delete_accb_${accb.accbpk}').submit();|" class="btn btn-primary a-btn-slide-text"> 
+		                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    		</a>
+              			</form>
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

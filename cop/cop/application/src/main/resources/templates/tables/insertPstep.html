@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/admin-layout">
+
+ <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+    <title>PROCESS STEP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+</head>
+<body>
+<div layout:fragment="content">
+            <div class="row">
+            <h1>PROCESS STEP</h1>
+            
+        
+            <form action="#"th:action="@{/insertPstep}"th:object="${pstep}"method="post"class="form">
+            
+            <div class="form-group">
+                 
+                <div class="form-group">
+                    <label for="prscnum">PROCESS SHEET NUMBER</label>
+                    <input class="form-control"type="text"th:field="*{prscnum}"id="prscnum"placeholder="PROCESS SHEET NUMBER"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('prscnum')}"th:errors="*{String}"></div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="matlcode">Material</label>
+                    <input class="form-control"type="text"th:field="*{matlcode}"id="matlcode"placeholder="Material"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('matlcode')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prresou">process ou</label>
+                    <input class="form-control"type="text"th:field="*{prresou}"id="prresou"placeholder="process ou"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('prresou')}"th:errors="*{text}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stepnum">Step num</label>
+                    <input class="form-control"type="number"th:field="*{stepnum}"id="stepnum"placeholder="Step num"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('stepnum')}"th:errors="*{stepnum}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prcsuom">Process UOM </label>
+                    <input class="form-control"type="text"th:field="*{prcsuom}"id="prcsuom"placeholder="Process UOM "required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('prcsuom')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prcsuomqty">Process UOM  Quantity</label>
+                    <input class="form-control"type="number"th:field="*{prcsuomqty}"id="prcsuomqty"placeholder="Process UOM  Quantity"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('prcsuomqty')}"th:errors="*{prcsuomqty}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prcsctr">Process Center</label>
+                    <input class="form-control"type="text"th:field="*{prcsctr}"id="prcsctr"placeholder="Process center"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('prcsctr')}"th:errors="*{prcsctr}"></div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="interop">Inter op</label>
+                    <input class="form-control"type="text"th:field="*{interop}"id="interop"placeholder="Inter op"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('interop')}"th:errors="*{String}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cnvbuomqty">cnvbuomqty</label>
+                    <input class="form-control"type="number"th:field="*{cnvbuomqty}"id="cnvbuomqty"placeholder="cnvbuomqty"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('cnvbuomqty')}"th:errors="*{cnvbuomqty}"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="setup">SETUP</label>
+                    <input class="form-control"type="text"th:field="*{setup}"id="setup"placeholder="SETUP"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('setup')}"th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="interop">INTEROP</label>
+                    <input class="form-control"type="text"th:field="*{interop}"id="interop"placeholder="INTEROP"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('interop')}"th:errors="*{String}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="runop">RUN OP</label>
+                    <input class="form-control"type="text"th:field="*{runop}"id="runop"placeholder="RUN OP"required="true"autofocus="true">
+                    <div class="alert alert-warning"th:if="${#fields.hasErrors('runop')}"th:errors="*{String}"></div>
+                </div> 
+                 <div class="form-group" >
+                    <input class="form-control" type="hidden"  th:value="${mode}" name="mode">
+                </div>
+                
+                <input type="submit"  class="btn btn-success" th:value="Save">
+                <input type="button"  class="btn btn-success" value="Cancel" onclick="window.history.back();">
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"crossorigin="anonymous"></script>
+</body>
